@@ -1,6 +1,10 @@
 # Mike Petro portfolio
 
-A dependency-free, local static website. Nothing has been deployed or pushed.
+A dependency-free static website. Source repository: https://github.com/jay-rtl/Mike-Literary-Agent
+
+GitHub Pages is configured to serve the `docs/` directory from `main` at https://jay-rtl.github.io/Mike-Literary-Agent/.
+
+After editing source files, run `npm run prepare:publish` to refresh `docs/`, review changes, then commit and push when authorized. GitHub Pages deploys pushes to the configured branch automatically.
 
 ## Preview
 
@@ -28,7 +32,7 @@ The website uses no email API, database, analytics, cookies, external font servi
 - `script.js`: navigation, reveals, stage disclosures, form validation, email draft, and copy fallback.
 - `config.js`: recipient configuration.
 - `assets/`: responsive JPEG exports of both supplied portraits, without facial alteration.
-- `robots.txt`: allows crawling. No domain or sitemap URL is fabricated.
+- `robots.txt` and `sitemap.xml`: public GitHub Pages crawl configuration. Canonical and social URLs use the confirmed Pages address.
 - `server.mjs`: loopback-only development server; not production hosting.
 - `reference-original.html`: untouched supplied HTML for reference. Do not publish it as a second page.
 - `tests/`: local browser audit scripts, screenshots, and observed results. Do not publish this directory.
@@ -39,12 +43,12 @@ Georgia and Arial provide the editorial serif/sans pairing through system fonts,
 ## Publication checklist
 
 1. Set and confirm the recipient email address.
-2. Supply the production domain. Add the canonical URL and `og:url`; convert social image URLs to absolute public URLs; generate a one-page sitemap and reference it in `robots.txt`.
+2. If moving to a custom domain, update the canonical URL, `og:url`, absolute social image URLs, sitemap, and robots sitemap reference together.
 3. Test the configured inquiry on actual desktop and mobile email applications, including the copy fallback and a longer draft.
 4. Review final professional copy and any jurisdiction-specific privacy notice, including the hosting provider's access logs and Mike's email retention/access practices. These have not been supplied.
 5. Serve over HTTPS and verify production headers, redirects, crawlability, and social previews.
 
-Publish only `index.html`, `styles.css`, `script.js`, `config.js`, `robots.txt`, and `assets/` to the same public root. Do not publish the full workspace. Deployment requires separate authorization.
+Publish only the contents of `docs/`. The source, tests, audit files, and development server are not part of the served website. Further deployment changes require user authorization.
 
 ## Verification
 
