@@ -13,13 +13,13 @@ Alternatively, open `index.html` directly. Clipboard access may be restricted on
 
 ## Set the recipient
 
-In **config.js**, set the single `recipientEmail` value to Mike's confirmed email address:
+The user-supplied inquiry address is configured in **config.js**:
 
 ```js
-window.MIKE_PETRO_CONFIG = Object.freeze({ recipientEmail: "" });
+window.MIKE_PETRO_CONFIG = Object.freeze({ recipientEmail: "mike.petro@lexiconinkhouse.com" });
 ```
 
-The empty value is intentional. No recipient has been invented. Until configured, valid form submission prepares a copyable draft and explains that email inquiries are unavailable, with Mike's telephone number as the alternative.
+If this setting is ever cleared, valid submission still prepares a copyable draft and explains that the recipient is unavailable, with Mike's telephone number as the alternative.
 
 Once configured, the form validates full name, email, book title, and message; prepares all completed fields; and activates a `mailto:` link. The visitor's email application is responsible for opening the draft. The visitor must review and click Send. Opening an application cannot be reliably detected, so the copyable draft is always provided. Long drafts can exceed some email applications' URI limits; copy the full prepared text in that case.
 
@@ -42,7 +42,7 @@ Georgia and Arial provide the editorial serif/sans pairing through system fonts,
 
 ## Publication checklist
 
-1. Set and confirm the recipient email address.
+1. Confirm any future recipient changes with Mike; the currently supplied address is configured.
 2. If moving to a custom domain, update the canonical URL, `og:url`, absolute social image URLs, sitemap, and robots sitemap reference together.
 3. Test the configured inquiry on actual desktop and mobile email applications, including the copy fallback and a longer draft.
 4. Review final professional copy and any jurisdiction-specific privacy notice, including the hosting provider's access logs and Mike's email retention/access practices. These have not been supplied.

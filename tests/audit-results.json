@@ -8,6 +8,7 @@
     "Structured data parses",
     "Required fields have associated errors and focus",
     "Invalid email rejected",
+    "User-supplied recipient used by the inquiry draft",
     "Missing recipient gives honest configuration state and draft",
     "Configured recipient and correctly encoded subject/body",
     "Manual email draft link activated",
@@ -121,9 +122,9 @@
   ],
   "performance": [
     {
-      "domContentLoadedMs": 46.10000000055879,
-      "durationMs": 60.60000000055879,
-      "transferBytes": 21914
+      "domContentLoadedMs": 19.59999999962747,
+      "durationMs": 28.799999999813735,
+      "transferBytes": 22169
     }
   ]
 }

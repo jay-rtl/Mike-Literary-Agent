@@ -1,5 +1,5 @@
 import { spawnSync } from 'node:child_process';
-import { writeFile } from 'node:fs/promises';
+import { readFile, writeFile } from 'node:fs/promises';
 const credential = spawnSync('git', ['credential', 'fill'], {
   input: 'protocol=https\nhost=github.com\n\n', encoding: 'utf8',
   env: { ...process.env, GIT_TERMINAL_PROMPT: '0', GCM_INTERACTIVE: 'Never' }
@@ -38,8 +38,9 @@ else {
   const html = files[0].text;
   if (!html.includes(`<link rel="canonical" href="${base}">`) || !html.includes(`property="og:url" content="${base}"`)) throw new Error('Live canonical/social URL mismatch');
   if (!files.find(file => file.path === 'sitemap.xml').text.includes(`<loc>${base}</loc>`)) throw new Error('Live sitemap URL mismatch');
-  if (!files.find(file => file.path === 'config.js').text.includes('recipientEmail: ""')) throw new Error('Unexpected recipient configuration');
-  const report = { head, url: base, httpsEnforced: pages.https_enforced, workflow: { conclusion: run.conclusion, url: run.html_url }, files: files.map(({ text, ...file }) => file), checks: ['Deployed workflow succeeded for pushed commit', 'All ten public page/asset URLs returned HTTP 200', 'Live canonical and Open Graph URL match confirmed address', 'Live sitemap matches confirmed address', 'Blank recipient preserved intentionally'] };
+  const localConfig = await readFile('config.js', 'utf8');
+  if (files.find(file => file.path === 'config.js').text.replace(/\r\n/g, '\n').trim() !== localConfig.replace(/\r\n/g, '\n').trim()) throw new Error('Live recipient configuration differs from source');
+  const report = { head, url: base, httpsEnforced: pages.https_enforced, workflow: { conclusion: run.conclusion, url: run.html_url }, files: files.map(({ text, ...file }) => file), checks: ['Deployed workflow succeeded for pushed commit', 'All ten public page/asset URLs returned HTTP 200', 'Live canonical and Open Graph URL match confirmed address', 'Live sitemap matches confirmed address', 'Live recipient configuration matches source'] };
   await writeFile('tests/deployment-results.json', JSON.stringify(report, null, 2));
   console.log(JSON.stringify(report, null, 2));
 }

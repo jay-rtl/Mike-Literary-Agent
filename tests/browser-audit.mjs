@@ -31,7 +31,9 @@ await evaluate("document.querySelector('#inquiry-form').requestSubmit()");
 check('Required fields have associated errors and focus',await evaluate("document.querySelectorAll('[aria-invalid=true]').length===4 && document.activeElement.id==='full-name' && document.getElementById('full-name-error').textContent.length>0"));
 await evaluate("document.querySelector('#full-name').value='Test Author';document.querySelector('#email').value='not-an-email';document.querySelector('#book-title').value='A Book & A Screen?';document.querySelector('#message').value='A message with & and # and Unicode — text.';document.querySelector('#inquiry-form').requestSubmit()");
 check('Invalid email rejected',await evaluate("document.activeElement.id==='email' && document.querySelector('#email').getAttribute('aria-invalid')==='true'"));
-await evaluate("document.querySelector('#email').value='author@example.com';document.querySelector('#inquiry-form').requestSubmit()");
+await evaluate("document.querySelector('#email').value='author@example.com';document.querySelector('#open-email').addEventListener('click',e=>e.preventDefault(),{once:true});document.querySelector('#inquiry-form').requestSubmit()");
+check('User-supplied recipient used by the inquiry draft',await evaluate("new URL(document.querySelector('#open-email').href).pathname==='mike.petro@lexiconinkhouse.com' && document.querySelector('#prepared-message').value.includes('To: mike.petro@lexiconinkhouse.com')"));
+await evaluate("window.MIKE_PETRO_CONFIG={recipientEmail:''};document.querySelector('#inquiry-form').requestSubmit()");
 check('Missing recipient gives honest configuration state and draft',await evaluate("!document.querySelector('#email-fallback').hidden && document.querySelector('#form-status').textContent.includes('not been configured') && document.querySelector('#open-email').hidden && document.querySelector('#prepared-message').value.includes('Full Name: Test Author')"));
 // Configure only this browser session. Prevent launching an external mail application.
 await evaluate("window.MIKE_PETRO_CONFIG={recipientEmail:'qa@example.com'};window.__mailClicks=0;document.querySelector('#open-email').addEventListener('click',e=>{e.preventDefault();window.__mailClicks++});document.querySelector('#inquiry-form').requestSubmit()");
@@ -83,6 +85,7 @@ check('No third-party requests or form network submission',requests.filter(u=>!u
 result.runtimeErrors=errors;
 result.requests=[...new Set(requests)];
 result.performance=await evaluate("performance.getEntriesByType('navigation').map(e=>({domContentLoadedMs:e.domContentLoadedEventEnd,durationMs:e.duration,transferBytes:e.transferSize}))");
+if(errors.length) console.error('Browser errors:',errors);
 check('No runtime exceptions or browser error logs',errors.length===0);
 await writeFile('tests/audit-results.json',JSON.stringify(result,null,2));
 console.log(JSON.stringify(result,null,2));
