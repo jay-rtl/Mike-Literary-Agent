@@ -1,5 +1,7 @@
 # Final delivery audit
 
+This is the original local implementation audit. The later user-authorized GitHub Pages deployment and production URL configuration are documented in `DEPLOYMENT.md`; local live-verification results are in `tests/deployment-results.json`.
+
 Date: October 24, 2026 (user timezone: America/Chicago).
 
 ## 1. Implemented
