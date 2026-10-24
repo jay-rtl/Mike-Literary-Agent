@@ -26,7 +26,7 @@ if (!run || run.status !== 'completed') { process.exitCode = 2; }
 else if (run.conclusion !== 'success') { throw new Error('Deployment workflow failed'); }
 else {
   const base = pages.html_url;
-  const paths = ['', 'styles.css', 'script.js', 'config.js', 'robots.txt', 'sitemap.xml', 'assets/mike-petro-hero-1100.jpg', 'assets/mike-petro-hero-550.jpg', 'assets/mike-petro-about-491.jpg', 'assets/mike-petro-about-246.jpg'];
+  const paths = ['', 'styles.css', 'script.js', 'config.js', 'robots.txt', 'sitemap.xml', 'assets/mike-petro-hero-1100.jpg', 'assets/mike-petro-hero-550.jpg', 'assets/mike-petro-about-491.jpg', 'assets/mike-petro-about-246.jpg', 'assets/favicon.svg', 'assets/favicon.ico', 'assets/apple-touch-icon.png'];
   const responses = await Promise.allSettled(paths.map(async path => {
     const response = await fetch(base + path, { cache: 'no-store' });
     const bytes = new Uint8Array(await response.arrayBuffer());
@@ -36,11 +36,12 @@ else {
   const files = responses.map(response => response.value);
   for (const file of files) if (file.status !== 200 || file.bytes === 0) throw new Error(`Live asset failed: ${file.path} HTTP ${file.status}`);
   const html = files[0].text;
+  for (const icon of ['favicon.svg', 'favicon.ico', 'apple-touch-icon.png']) if (!html.includes(`href="assets/${icon}"`)) throw new Error(`Live icon link missing: ${icon}`);
   if (!html.includes(`<link rel="canonical" href="${base}">`) || !html.includes(`property="og:url" content="${base}"`)) throw new Error('Live canonical/social URL mismatch');
   if (!files.find(file => file.path === 'sitemap.xml').text.includes(`<loc>${base}</loc>`)) throw new Error('Live sitemap URL mismatch');
   const localConfig = await readFile('config.js', 'utf8');
   if (files.find(file => file.path === 'config.js').text.replace(/\r\n/g, '\n').trim() !== localConfig.replace(/\r\n/g, '\n').trim()) throw new Error('Live recipient configuration differs from source');
-  const report = { head, url: base, httpsEnforced: pages.https_enforced, workflow: { conclusion: run.conclusion, url: run.html_url }, files: files.map(({ text, ...file }) => file), checks: ['Deployed workflow succeeded for pushed commit', 'All ten public page/asset URLs returned HTTP 200', 'Live canonical and Open Graph URL match confirmed address', 'Live sitemap matches confirmed address', 'Live recipient configuration matches source'] };
+  const report = { head, url: base, httpsEnforced: pages.https_enforced, workflow: { conclusion: run.conclusion, url: run.html_url }, files: files.map(({ text, ...file }) => file), checks: ['Deployed workflow succeeded for pushed commit', `All ${paths.length} public page/asset URLs returned HTTP 200`, 'SVG, ICO, and Apple touch icon links present', 'Live canonical and Open Graph URL match confirmed address', 'Live sitemap matches confirmed address', 'Live recipient configuration matches source'] };
   await writeFile('tests/deployment-results.json', JSON.stringify(report, null, 2));
   console.log(JSON.stringify(report, null, 2));
 }

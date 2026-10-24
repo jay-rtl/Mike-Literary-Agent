@@ -34,3 +34,19 @@ Current local validation: 31 Chrome assertions, including the user-supplied inqu
 Outstanding: actual email application opening and manual delivery remain NOT TESTED. No test message has been sent. Launch readiness: READY FOR REVIEW. Next action: review a prepared draft using a configured email application and send only if desired.
 
 Status and live HTTP verification are recorded separately in `tests/deployment-results.json` after publication.
+
+## Favicon update
+
+Implemented an original navy/champagne MP monogram in `assets/favicon.svg`, a 16/32px ICO fallback, and a 180px Apple touch icon. Added all three links to the source and published HTML; added local preview MIME types. The 180px rendered PNG was visually inspected for brand fit and legibility. Site layout is unchanged.
+
+| Audit category | Status | Evidence |
+| --- | --- | --- |
+| Functionality | PASS | SVG XML parses; icon files generated; production verification checks all icon links and HTTP responses. |
+| SEO | PASS | Correct icon link declarations reviewed; existing metadata retained. |
+| Responsive/Visual | PASS | Monogram PNG visually reviewed; size-specific icon variants supplied. |
+| Accessibility | NOT APPLICABLE | Browser chrome/decorative identity asset adds no page content or interaction. |
+| Security/Privacy | PASS | Local static assets only; SVG has no scripts or external references. |
+| Performance | PASS | Combined icon payload under 3 KB; no new scripts/dependencies. Core Web Vitals NOT TESTED for this update. |
+| Code/Regression | PASS | `npm run check`, `node --check server.mjs`, and `npm run prepare:publish` passed. |
+
+Tests/tools: Windows PowerShell/System.Drawing created raster variants; XML parsing validated SVG; `tools.view_image` inspected the rendered 180px PNG. GitHub Pages workflow and live icon HTTP/link checks are recorded in `tests/deployment-results.json`. Actual Safari home-screen installation and favicon appearance across browser chrome remain NOT TESTED. Launch readiness: READY FOR REVIEW. Next action: reload the live site; browser favicon caching may require reopening the tab.
