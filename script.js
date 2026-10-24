@@ -8,11 +8,15 @@
   function closeMenu(returnFocus = false) {
     navigation.classList.remove('is-open');
     menuButton.setAttribute('aria-expanded', 'false');
+    menuButton.setAttribute('aria-label', 'Open navigation menu');
+    menuButton.querySelector('.menu-label').textContent = 'Menu';
     if (returnFocus) menuButton.focus();
   }
   menuButton.addEventListener('click', () => {
     const open = navigation.classList.toggle('is-open');
     menuButton.setAttribute('aria-expanded', String(open));
+    menuButton.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
+    menuButton.querySelector('.menu-label').textContent = open ? 'Close' : 'Menu';
   });
   navigation.addEventListener('click', event => {
     const link = event.target.closest('a');
@@ -42,6 +46,17 @@
         }
       });
     }, { threshold: 0.08 });
+    // Stagger related items rather than animating an entire row as one block.
+    document.querySelectorAll('.rights-ledger, .author-genres, .faq-list').forEach(group => {
+      group.classList.remove('reveal');
+      [...group.children].forEach((element, index) => {
+        element.classList.add('reveal');
+        element.style.setProperty('--reveal-delay', `${Math.min(index * 65, 195)}ms`);
+      });
+    });
+    document.querySelectorAll('.service').forEach((element, index) => {
+      element.style.setProperty('--reveal-delay', `${index * 60}ms`);
+    });
     if (!reducedMotion.matches) document.querySelectorAll('.reveal').forEach(element => {
       element.classList.add('pending');
       revealObserver.observe(element);
@@ -61,7 +76,10 @@
     document.querySelectorAll('main section[id]').forEach(section => sectionObserver.observe(section));
   }
   const backTop = document.querySelector('.back-top');
-  function updateBackTop() { backTop.hidden = window.scrollY < 700; }
+  function updateBackTop() {
+    backTop.hidden = window.scrollY < 700;
+    document.querySelector('.site-header').classList.toggle('is-scrolled', window.scrollY > 30);
+  }
   window.addEventListener('scroll', updateBackTop, { passive: true });
   updateBackTop();
 

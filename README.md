@@ -28,7 +28,8 @@ The website uses no email API, database, analytics, cookies, external font servi
 ## Files
 
 - `index.html`: all public content, metadata, and Person structured data.
-- `styles.css`: design tokens, responsive layouts, and motion preferences.
+- `styles.css`: base design tokens and responsive layouts.
+- `editorial.css`: self-hosted typography, editorial refinements, animated menu, interaction styling, and reduced-motion overrides.
 - `script.js`: navigation, reveals, stage disclosures, form validation, email draft, and copy fallback.
 - `config.js`: recipient configuration.
 - `assets/`: responsive JPEG exports of both supplied portraits, without facial alteration.
@@ -38,7 +39,7 @@ The website uses no email API, database, analytics, cookies, external font servi
 - `tests/`: local browser audit scripts, screenshots, and observed results. Do not publish this directory.
 - `AUDIT.md`: scope, evidence, and outstanding verification.
 
-Georgia and Arial provide the editorial serif/sans pairing through system fonts, avoiding third-party font requests and font-loading shifts. The source information has been reorganized and edited; services, author categories, rights caveats, and professional disclaimer are retained. No new affiliations, achievements, testimonials, or adaptation credits are claimed.
+Cormorant Garamond and Manrope are self-hosted in `assets/fonts/`, with their SIL Open Font Licenses; system fallback fonts remain available. Visitors make no third-party font requests. Two fonts are preloaded. Both real portraits remain unchanged; the film section uses an illustrative generated book still life, documented in `ASSETS.md`. The source information has been reorganized and edited; services, author categories, rights caveats, and professional disclaimer are retained. No new affiliations, achievements, testimonials, or adaptation credits are claimed.
 
 ## Publication checklist
 

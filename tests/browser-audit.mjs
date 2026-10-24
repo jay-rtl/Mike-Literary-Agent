@@ -24,7 +24,8 @@ await cdp('Emulation.setDeviceMetricsOverride',{width:1440,height:1000,deviceSca
 await cdp('Page.navigate',{url:'http://127.0.0.1:4173/'}); await delay(1000);
 check('Title and description',await evaluate("document.title.includes('Mike Petro') && document.querySelector('meta[name=description]').content.length>50"));
 check('All internal anchor destinations exist',await evaluate("[...document.querySelectorAll('a[href^=\"#\"]')].every(a=>document.getElementById(a.hash.slice(1)))"));
-check('Both supplied portraits load',await evaluate("[...document.images].every(i=>i.complete && i.naturalWidth>0) && document.images.length===2"));
+check('Both supplied portraits load',await evaluate("[...document.querySelectorAll('.hero-portrait img,.about-portrait img')].every(i=>i.complete && i.naturalWidth>0) && document.querySelectorAll('.hero-portrait img,.about-portrait img').length===2"));
+check('Email displayed in contact and footer with correct mailto links',await evaluate("[...document.querySelectorAll('.email-link,.footer-email')].length===2 && [...document.querySelectorAll('.email-link,.footer-email')].every(a=>a.getAttribute('href')==='mailto:mike.petro@lexiconinkhouse.com' && a.textContent.includes('mike.petro@lexiconinkhouse.com'))"));
 check('Phone destinations correct',await evaluate("[...document.querySelectorAll('a[href^=\"tel:\"]')].every(a=>a.getAttribute('href')==='tel:+13322085295')"));
 check('Structured data parses',await evaluate("JSON.parse(document.querySelector('script[type=\"application/ld+json\"]').textContent)['@type']==='Person'"));
 await evaluate("document.querySelector('#inquiry-form').requestSubmit()");
@@ -66,6 +67,7 @@ for(const [width,height] of [[1440,1000],[1024,900],[768,1024],[390,844],[320,74
 }
 await evaluate("document.querySelector('.menu-toggle').click()");
 check('Mobile navigation opens',await evaluate("document.querySelector('.menu-toggle').getAttribute('aria-expanded')==='true' && getComputedStyle(document.querySelector('#primary-nav')).display==='flex'"));
+check('Mobile toggle has no border and animated icon enters close state',await evaluate("getComputedStyle(document.querySelector('.menu-toggle')).borderTopWidth==='0px' && document.querySelector('.menu-label').textContent==='Close' && document.querySelector('.menu-toggle').getAttribute('aria-label')==='Close navigation menu'"));
 await cdp('Input.dispatchKeyEvent',{type:'keyDown',key:'Escape',code:'Escape',windowsVirtualKeyCode:27});
 check('Escape closes navigation and returns focus',await evaluate("document.querySelector('.menu-toggle').getAttribute('aria-expanded')==='false' && document.activeElement.classList.contains('menu-toggle')"));
 await evaluate("document.querySelector('.menu-toggle').click();document.querySelector('#primary-nav a[href=\"#about\"]').click()");await delay(200);

@@ -17,7 +17,7 @@ for(const width of [1440,390]){
   await writeFile(`tests/review-${section}-${width}.png`,Buffer.from(shot.data,'base64'));
  }
 }
-const pairs=[['body','#20242b','#faf8f2'],['muted','#5e6268','#faf8f2'],['eyebrow','#79602a','#faf8f2'],['hero-body','#bfc5cf','#101b2e'],['gold-button','#101b2e','#d1b675'],['form-help','#bfc5cf','#14213d'],['error','#ffd0bd','#14213d'],['muted-soft','#5e6268','#eeece6']];
+const pairs=[['body','#20242b','#f7f4ec'],['muted','#5e6268','#f7f4ec'],['eyebrow','#79602a','#f7f4ec'],['hero-body','#bfc5cf','#101b2e'],['gold-button','#101b2e','#d1b675'],['form-help','#bfc5cf','#14213d'],['error','#ffd0bd','#14213d'],['muted-soft','#5e6268','#ede9df']];
 function lum(hex){const c=hex.match(/[a-f\d]{2}/gi).map(x=>parseInt(x,16)/255).map(x=>x<=.04045?x/12.92:((x+.055)/1.055)**2.4);return c[0]*.2126+c[1]*.7152+c[2]*.0722}
 const contrast=pairs.map(([name,fg,bg])=>{const a=lum(fg),b=lum(bg);return{name,ratio:Math.round((Math.max(a,b)+.05)/(Math.min(a,b)+.05)*100)/100,AA:(Math.max(a,b)+.05)/(Math.min(a,b)+.05)>=4.5}});
 await writeFile('tests/contrast-results.json',JSON.stringify(contrast,null,2));console.log(contrast);

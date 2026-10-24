@@ -1,17 +1,17 @@
 [
   {
     "name": "body",
-    "ratio": 14.66,
+    "ratio": 14.17,
     "AA": true
   },
   {
     "name": "muted",
-    "ratio": 5.78,
+    "ratio": 5.58,
     "AA": true
   },
   {
     "name": "eyebrow",
-    "ratio": 5.62,
+    "ratio": 5.43,
     "AA": true
   },
   {
@@ -36,7 +36,7 @@
   },
   {
     "name": "muted-soft",
-    "ratio": 5.19,
+    "ratio": 5.06,
     "AA": true
   }
 ]

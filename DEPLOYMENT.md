@@ -1,5 +1,7 @@
 # GitHub Pages deployment
 
+The latest editorial redesign, public email display, borderless animated menu, local fonts, and supporting image are documented in `REFINEMENT-AUDIT.md` and `ASSETS.md`. These supersede the earlier design/asset notes below.
+
 The user authorized deployment after supplying the repository URL. GitHub confirmed this is an empty public repository with push and administration access.
 
 - Repository: https://github.com/jay-rtl/Mike-Literary-Agent
