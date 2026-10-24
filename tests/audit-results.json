@@ -134,8 +134,6 @@
   ],
   "runtimeErrors": [],
   "requests": [
-    "http://127.0.0.1:4173/assets/mike-petro-hero-1100.jpg",
-    "http://127.0.0.1:4173/assets/mike-petro-about-491.jpg",
     "http://127.0.0.1:4173/",
     "http://127.0.0.1:4173/styles.css",
     "http://127.0.0.1:4173/assets/fonts/cormorant-latin.woff2",
@@ -143,7 +141,9 @@
     "http://127.0.0.1:4173/editorial.css",
     "http://127.0.0.1:4173/config.js",
     "http://127.0.0.1:4173/script.js",
+    "http://127.0.0.1:4173/assets/mike-petro-hero-1100.jpg",
     "http://127.0.0.1:4173/assets/fonts/cormorant-italic-latin.woff2",
+    "http://127.0.0.1:4173/assets/mike-petro-about-491.jpg",
     "http://127.0.0.1:4173/assets/favicon.svg",
     "http://127.0.0.1:4173/assets/editorial-book-720.jpg",
     "http://127.0.0.1:4173/assets/mike-petro-hero-550.jpg",
@@ -151,9 +151,9 @@
   ],
   "performance": [
     {
-      "domContentLoadedMs": 17.5,
-      "durationMs": 42.5,
-      "transferBytes": 23849
+      "domContentLoadedMs": 16.40000000037253,
+      "durationMs": 50.90000000037253,
+      "transferBytes": 23841
     }
   ]
 }

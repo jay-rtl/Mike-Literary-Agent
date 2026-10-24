@@ -36,7 +36,7 @@ else {
   const files = responses.map(response => response.value);
   for (const file of files) if (file.status !== 200 || file.bytes === 0) throw new Error(`Live asset failed: ${file.path} HTTP ${file.status}`);
   const html = files[0].text;
-  if ((html.match(/href="mailto:mike\.petro@lexiconinkhouse\.com"/g) || []).length !== 2) throw new Error('Live visible email links missing');
+  if ((html.match(/href="mailto:mike\.literaryagent@gmail\.com"/g) || []).length !== 2) throw new Error('Live visible email links missing');
   if (!html.includes('href="editorial.css"')) throw new Error('Live editorial stylesheet missing');
   for (const icon of ['favicon.svg', 'favicon.ico', 'apple-touch-icon.png']) if (!html.includes(`href="assets/${icon}"`)) throw new Error(`Live icon link missing: ${icon}`);
   if (!html.includes(`<link rel="canonical" href="${base}">`) || !html.includes(`property="og:url" content="${base}"`)) throw new Error('Live canonical/social URL mismatch');

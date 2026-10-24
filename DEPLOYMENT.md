@@ -14,7 +14,7 @@ The user authorized deployment after supplying the repository URL. GitHub confir
 
 Canonical, Open Graph URL, absolute social-image URLs, robots sitemap reference, and one-page sitemap now use the confirmed GitHub Pages URL. These supersede the domain-related pending items in the original local audit (`AUDIT.md`).
 
-The user subsequently supplied `mike.petro@lexiconinkhouse.com`. It is configured in `config.js` and `docs/config.js` for manually sendable email drafts. Visitors must review and send their own message; the copy fallback remains available. No email sending service or database was introduced. This supersedes the missing-recipient item in the original local audit.
+The user subsequently supplied `mike.literaryagent@gmail.com`. It is configured in `config.js` and `docs/config.js` for manually sendable email drafts. Visitors must review and send their own message; the copy fallback remains available. No email sending service or database was introduced. This supersedes the missing-recipient item in the original local audit.
 
 Current local validation: 31 Chrome assertions, including the user-supplied inquiry recipient, plus JavaScript syntax checks. Prior checks include eight sampled contrast checks and representative responsive screenshot review. Actual email-application handoff, screen readers, physical-device/cross-browser validation, Lighthouse/field Core Web Vitals, and jurisdiction-specific legal review remain untested as documented in `AUDIT.md`.
 

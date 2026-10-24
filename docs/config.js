@@ -1,2 +1,2 @@
 // Mike's confirmed inquiry recipient. No email is sent automatically.
-window.MIKE_PETRO_CONFIG = Object.freeze({ recipientEmail: "mike.petro@lexiconinkhouse.com" });
+window.MIKE_PETRO_CONFIG = Object.freeze({ recipientEmail: "mike.literaryagent@gmail.com" });

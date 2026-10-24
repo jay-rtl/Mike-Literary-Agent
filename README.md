@@ -16,7 +16,7 @@ Alternatively, open `index.html` directly. Clipboard access may be restricted on
 The user-supplied inquiry address is configured in **config.js**:
 
 ```js
-window.MIKE_PETRO_CONFIG = Object.freeze({ recipientEmail: "mike.petro@lexiconinkhouse.com" });
+window.MIKE_PETRO_CONFIG = Object.freeze({ recipientEmail: "mike.literaryagent@gmail.com" });
 ```
 
 If this setting is ever cleared, valid submission still prepares a copyable draft and explains that the recipient is unavailable, with Mike's telephone number as the alternative.
