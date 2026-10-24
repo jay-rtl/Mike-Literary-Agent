@@ -1,0 +1,42 @@
+[
+  {
+    "name": "body",
+    "ratio": 14.66,
+    "AA": true
+  },
+  {
+    "name": "muted",
+    "ratio": 5.78,
+    "AA": true
+  },
+  {
+    "name": "eyebrow",
+    "ratio": 5.62,
+    "AA": true
+  },
+  {
+    "name": "hero-body",
+    "ratio": 9.93,
+    "AA": true
+  },
+  {
+    "name": "gold-button",
+    "ratio": 8.75,
+    "AA": true
+  },
+  {
+    "name": "form-help",
+    "ratio": 9.21,
+    "AA": true
+  },
+  {
+    "name": "error",
+    "ratio": 11.42,
+    "AA": true
+  },
+  {
+    "name": "muted-soft",
+    "ratio": 5.19,
+    "AA": true
+  }
+]
