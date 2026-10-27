@@ -74,7 +74,9 @@ for(const page of pages){
     const pdf=await cdp('Page.printToPDF',{printBackground:true,preferCSSPageSize:true});
     const bytes=Buffer.from(pdf.data,'base64');
     check('Native profile renders a nonempty printable PDF',bytes.length>5000&&bytes.subarray(0,4).toString()==='%PDF');
-    check('Printable reference fits on exactly one A4 page',(bytes.toString('latin1').match(/\/Type\s*\/Page\b/g)||[]).length===1);
+    const printPages=(bytes.toString('latin1').match(/\/Type\s*\/Page\b/g)||[]).length;
+    check('Expanded printable reference spans readable A4 pages',printPages>=3&&printPages<=5);
+    console.log(`Expanded reference PDF: ${printPages} A4 pages`);
     await writeFile('tests/accreditation-print.pdf',bytes);
     await cdp('Emulation.setEmulatedMedia',{media:'screen',features:[{name:'prefers-reduced-motion',value:'reduce'}]});
   }

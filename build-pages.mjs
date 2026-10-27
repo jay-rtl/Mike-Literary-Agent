@@ -41,7 +41,7 @@ for(const page of PAGES){
     .replace(/(<meta property="og:description" content=")[^"]+/,`$1${escape(page.description)}`)
     .replace(/(<meta name="twitter:title" content=")[^"]+/,`$1${escape(page.title)}`)
     .replace(/(<meta name="twitter:description" content=")[^"]+/,`$1${escape(page.description)}`);
-  if(page.key==='accreditation')head=head.replace('</head>','  <link rel="stylesheet" href="accreditation.css">\n</head>');
+  if(page.key==='accreditation')head=head.replace('<head>','<head>\n  <meta name="referrer" content="no-referrer">\n  <meta http-equiv="Content-Security-Policy" content="default-src \'self\'; script-src \'self\'; style-src \'self\' \'unsafe-inline\'; img-src \'self\' data:; font-src \'self\'; connect-src \'none\'; frame-src \'none\'; object-src \'none\'; base-uri \'self\'; form-action \'none\'">').replace('</head>','  <link rel="stylesheet" href="accreditation.css">\n</head>');
   head=head.replace('<script src="config.js"','<script src="routing.js" defer></script>\n  <script src="config.js"');
   const nav = navigation.map(([key,label])=>{
     const target=PAGES.find(candidate=>candidate.key===key);

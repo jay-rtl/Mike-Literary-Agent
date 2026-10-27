@@ -56,6 +56,45 @@
 @media(max-width:850px){.credential-layout{gap:35px;grid-template-columns:1.1fr .8fr;padding-block:45px}.credential-copy h1{font-size:57px}.credential-portrait{height:260px}.credential-card h2{font-size:22px}.credential-copy .eyebrow{font-size:8px;letter-spacing:1.3px}.credential-button{font-size:8px;padding:12px 17px;gap:15px}.credential-card-body{padding:17px}.credential-band .wrap>span{font-size:9px;letter-spacing:1.4px}.credential-details h2{font-size:28px}}
 @media(max-width:700px){.credential-band .wrap{gap:12px;min-height:48px}.credential-band .wrap>span{font-size:8px;letter-spacing:.9px;max-width:230px}.credential-band button{font-size:9px;white-space:nowrap;gap:8px}.credential-layout{grid-template-columns:1fr;gap:32px;min-height:0;padding-block:45px}.credential-copy h1{font-size:clamp(45px,11.5vw,65px);letter-spacing:-.8px;line-height:1.03}.credential-copy .eyebrow{font-size:7px;letter-spacing:1.3px;margin-bottom:22px}.credential-copy>p:not(.eyebrow){font-size:12px;line-height:1.95;margin-bottom:25px}.credential-copy{max-width:100%}.credential-card{max-width:350px;justify-self:center}.credential-portrait{height:290px;object-position:50% 25%}.credential-card-body{padding:21px}.credential-card h2{font-size:25px}.credential-details{padding:31px 0}.credential-details .wrap{grid-template-columns:1fr;gap:25px}.credential-details article+article{border-top:1px solid #e1e2e4;padding-top:25px}.credential-details h2{font-size:30px}.credential-details p{font-size:12px}.credential-background{object-position:65% center}.credential-hero::after{background:#0b1521c9}.credential-id dt{font-size:8px}}
 @media(max-width:370px){.credential-band .wrap>span{font-size:7px;letter-spacing:.5px}.credential-copy h1{font-size:44px}.credential-copy .eyebrow{font-size:6px}.credential-layout{padding-block:35px}.credential-portrait{height:265px}}
+.reference-records{background:var(--reference-red);color:#fff;padding:76px 0}
+.reference-records .eyebrow{color:#fff}
+.reference-records h2,.reference-standing h2{font:500 clamp(40px,4.3vw,65px)/1.06 var(--serif);letter-spacing:-.6px;margin:18px 0 24px}
+.reference-records h2 em,.reference-standing h2 em{font-weight:400}
+.reference-intro{max-width:740px;font-size:14px;line-height:1.9;margin-bottom:36px}
+.reference-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:40px;align-items:center}
+.reference-panel{padding:30px;border:1px solid #ffffff42;border-radius:16px;background:#ffffff09}
+.reference-label{font-size:9px;letter-spacing:1.3px;margin:0 0 18px}
+.reference-records h3,.reference-standing h3{font:500 30px/1.15 var(--serif);margin:0 0 16px}
+.reference-panel>p:not(.reference-label),.reference-source p,.reference-credibility p,.reference-basis{font-size:12px;line-height:1.9}
+.reference-table{margin:22px 0 0}
+.reference-table>div{display:grid;grid-template-columns:155px 1fr;gap:20px;padding:14px 0;border-top:1px solid #ffffff40}
+.reference-table dt{font-size:9px;letter-spacing:.7px;text-transform:uppercase;line-height:1.7;font-weight:700}
+.reference-table dd{font-size:12px;line-height:1.8;margin:0;overflow-wrap:anywhere}
+.reference-records a{color:#fff;text-underline-offset:4px}
+.reference-records a:focus-visible{outline:2px solid #fff;outline-offset:6px}
+.reference-note{display:block;font-size:11px}
+.reference-barcode{margin:20px 0 0;max-width:360px}
+.reference-barcode img{display:block;width:100%;height:auto;background:#fff;border-radius:6px}
+.reference-barcode figcaption{font-size:10px;line-height:1.7;margin-top:10px}
+.reference-source{display:grid;grid-template-columns:112px 1fr;gap:24px;align-items:start}
+.reference-source img{display:block;background:#fff;border-radius:5px;width:112px;height:112px}
+.reference-source h3{font-size:27px}
+.reference-source p{margin-bottom:16px}
+.reference-source a{font-size:11px;line-height:1.8}
+.reference-protections{margin-top:28px}
+.reference-protections dl{margin-top:22px}
+.reference-protections dl>div{padding:15px 0;border-top:1px solid #ffffff40}
+.reference-protections dt{font-size:12px;font-weight:700;margin-bottom:4px}
+.reference-protections dd{margin:0;font-size:12px;line-height:1.8}
+.reference-standing{background:#f6f5f2;color:#20242b;padding:76px 0}
+.reference-standing .eyebrow{color:#a61024}
+.reference-standing .reference-panel{background:#fff;border-color:#dedfe2;color:#20242b;max-width:960px}
+.reference-standing .reference-table>div{border-color:#dedfe2}
+.reference-credibility{padding:36px 0 20px;max-width:960px}
+.reference-credibility p{margin-bottom:16px}
+.reference-basis{border-left:3px solid var(--reference-red);padding:18px 22px;background:#fff;margin:0}
+@media(max-width:1000px){.reference-grid{grid-template-columns:1fr;gap:30px}.reference-source{max-width:620px}.reference-source img{width:112px;height:112px}}
+@media(max-width:600px){.reference-records,.reference-standing{padding:48px 0}.reference-panel{padding:22px}.reference-table>div{grid-template-columns:1fr;gap:5px}.reference-source{grid-template-columns:90px 1fr;gap:18px}.reference-source img{width:90px;height:90px}.reference-records h3,.reference-standing h3{font-size:27px}.reference-source h3{font-size:24px}.reference-basis{padding:16px}.reference-intro{font-size:13px}}
 @media print{
   @page{size:A4 portrait;margin:12mm}
   [data-page=accreditation]{background:#fff!important;color:#20242b!important;print-color-adjust:exact;-webkit-print-color-adjust:exact}
@@ -90,4 +129,28 @@
   .credential-details p{font-size:8pt;line-height:1.6}
   .credential-details a{font-size:7pt;margin-top:5px}
   [data-page=accreditation] .reveal{opacity:1!important;transform:none!important;transition:none!important}
+  .reference-records,.reference-standing{background:#fff!important;color:#20242b!important;padding:20px 0;break-before:page}
+  .reference-records .eyebrow,.reference-standing .eyebrow{color:#a61024;font-size:7pt}
+  .reference-records h2,.reference-standing h2{font-size:27pt;margin:12px 0 18px}
+  .reference-records h3,.reference-standing h3{font-size:17pt;break-after:avoid}
+  .reference-intro{font-size:9pt;line-height:1.6;margin-bottom:18px}
+  .reference-grid{display:block}
+  .reference-panel{padding:16px;border-color:#ccc;background:#fff;border-radius:5px}
+  .reference-panel>p:not(.reference-label),.reference-source p,.reference-credibility p,.reference-basis{font-size:9pt;line-height:1.6}
+  .reference-label{font-size:6.5pt;margin-bottom:10px}
+  .reference-table{margin-top:14px}
+  .reference-table>div{grid-template-columns:140px 1fr;gap:15px;padding:9px 0;border-color:#ccc;break-inside:avoid}
+  .reference-table dt{font-size:7pt}.reference-table dd{font-size:8pt}.reference-note{font-size:7pt}
+  .reference-records a{color:#a61024}
+  .reference-barcode{max-width:230px;break-inside:avoid;margin-top:12px}
+  .reference-barcode figcaption{font-size:7pt;color:#444}
+  .reference-source{display:grid;grid-template-columns:85px 1fr;gap:18px;margin:22px 0;break-inside:avoid;max-width:none}
+  .reference-source img{width:85px;height:85px}.reference-source p{margin-bottom:8px}.reference-source a{font-size:8pt}
+  .reference-protections{margin-top:18px;break-before:page}
+  .reference-protections dl{margin-top:12px}.reference-protections dl>div{padding:10px 0;border-color:#ccc;break-inside:avoid}
+  .reference-protections dt,.reference-protections dd{font-size:9pt}
+  .reference-standing{break-before:page}
+  .reference-standing .reference-panel{break-inside:avoid}
+  .reference-credibility{padding:22px 0 12px;break-inside:avoid}
+  .reference-basis{padding:12px 16px;break-inside:avoid}
 }

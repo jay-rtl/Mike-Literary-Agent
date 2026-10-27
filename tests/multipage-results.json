@@ -73,7 +73,7 @@
     "Both print buttons invoke the browser print action",
     "Print layout hides navigation and preserves profile text",
     "Native profile renders a nonempty printable PDF",
-    "Printable reference fits on exactly one A4 page",
+    "Expanded printable reference spans readable A4 pages",
     "contact.html: JavaScript initializes without form/stage assumptions",
     "contact.html: page navigation states match real destinations",
     "contact: navigation uses clean URLs",

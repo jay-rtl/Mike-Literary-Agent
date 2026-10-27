@@ -27,6 +27,12 @@ Original code-authored MP monogram in SVG, ICO, and Apple touch PNG variants, ma
 
 ## Independent-profile architectural background
 
+## Local source-reference codes
+
+`assets/caa-company-qr.png` encodes exactly `https://www.caa.com/about-us`; generated locally with the temporary `qrcode` package (296px, four-module margin, medium error correction). `assets/reference-barcode.svg` encodes exactly `BKSTD2357400` in Code 128, generated with temporary `bwip-js` tooling. Both payloads were decoded with ZXing; the barcode was decoded from its Chrome-rendered screenshot. These are reference tools, not credentials or proof of affiliation. Tooling is not shipped as website JavaScript and no production dependency was added.
+
+## Architectural background provenance
+
 Generated with the built-in image_gen tool, not the CLI fallback. The generated output was visually inspected and exported to responsive project assets:
 
 - `assets/profile-atrium-1600.jpg` (176,617 bytes)
