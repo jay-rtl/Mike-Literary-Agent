@@ -7,11 +7,13 @@ let id=0;const pending=new Map();
 ws.onmessage=e=>{const m=JSON.parse(e.data);if(m.id){pending.get(m.id)(m.result);pending.delete(m.id)}};
 const cdp=(method,params={})=>new Promise(resolve=>{pending.set(++id,resolve);ws.send(JSON.stringify({id,method,params}))});
 const evaluate=async expression=>(await cdp('Runtime.evaluate',{expression,returnByValue:true,awaitPromise:true})).result.value;
+async function ready(){for(let attempt=0;attempt<60;attempt++){if(await evaluate("document.readyState==='complete'&&!!document.querySelector('.reference-records')"))return;await new Promise(r=>setTimeout(r,250));}throw Error('Reference page did not finish loading');}
 await cdp('Page.enable');
 await cdp('Emulation.setEmulatedMedia',{features:[{name:'prefers-reduced-motion',value:'reduce'}]});
 await cdp('Emulation.setDeviceMetricsOverride',{width:1440,height:1000,deviceScaleFactor:1,mobile:false});
-await cdp('Page.navigate',{url:'http://127.0.0.1:4173/accreditation/'});
+await cdp('Page.navigate',{url:(process.env.MIKE_REVIEW_URL||'http://127.0.0.1:4173/')+'accreditation/'});
 await new Promise(r=>setTimeout(r,600));
+await ready();
 await evaluate('document.fonts.ready');
 assert.equal(await evaluate("document.referrerPolicy || document.querySelector('meta[name=referrer]').content"),'no-referrer');
 assert.equal(await evaluate('document.forms.length'),0);
@@ -25,7 +27,7 @@ const blocked=await evaluate(`new Promise(async resolve=>{
   setTimeout(()=>{s.remove();f.remove();resolve(directives)},150);
 })`);
 for(const directive of ['connect-src','script-src-elem','frame-src'])assert.ok(blocked.includes(directive),directive);
-await cdp('Page.reload');await new Promise(r=>setTimeout(r,450));
+await cdp('Page.reload');await new Promise(r=>setTimeout(r,450));await ready();
 for(const [width,name,selector] of [[1440,'desktop','.reference-records'],[390,'mobile','.reference-records'],[1440,'standing','.reference-standing']]){
   await cdp('Emulation.setDeviceMetricsOverride',{width,height:1050,deviceScaleFactor:1,mobile:false});
   await evaluate(`document.querySelector('${selector}').scrollIntoView()`);

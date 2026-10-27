@@ -1,4 +1,6 @@
 node_modules/
+.local-deploy/
+hostinger-public-key.txt
 tests/*.png
 tests/chrome-profile/
 *.zip
