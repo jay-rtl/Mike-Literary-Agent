@@ -1,6 +1,6 @@
 import { spawnSync } from 'node:child_process';
 import { readFile, writeFile } from 'node:fs/promises';
-import { PAGES, ACCREDITATION_URL } from '../site-pages.mjs';
+import { PAGES } from '../site-pages.mjs';
 const credential = spawnSync('git', ['credential', 'fill'], {
   input: 'protocol=https\nhost=github.com\n\n', encoding: 'utf8',
   env: { ...process.env, GIT_TERMINAL_PROMPT: '0', GCM_INTERACTIVE: 'Never' }
@@ -45,14 +45,15 @@ else {
     if(!published.includes(`<link rel="canonical" href="${canonical}">`)) throw new Error(`Live canonical missing: ${page.file}`);
     if(!files.find(file=>file.path==='sitemap.xml').text.includes(`<loc>${canonical}</loc>`)) throw new Error(`Live sitemap missing: ${page.file}`);
   }
-  if(!files.find(file=>file.path==='accreditation.html').text.includes(`href="${ACCREDITATION_URL}"`)) throw new Error('Live accreditation reference missing');
+  const accreditation=files.find(file=>file.path==='accreditation.html').text;
+  if(accreditation.includes('sites.google.com')||accreditation.includes('<iframe')||!accreditation.includes('class="standards-ledger"')||!accreditation.includes('BKSTD2357400')) throw new Error('Live native accreditation content missing or still linked to Google Sites');
   if (!html.includes('href="editorial.css"')) throw new Error('Live editorial stylesheet missing');
   for (const icon of ['favicon.svg', 'favicon.ico', 'apple-touch-icon.png']) if (!html.includes(`href="assets/${icon}"`)) throw new Error(`Live icon link missing: ${icon}`);
   if (!html.includes(`<link rel="canonical" href="${base}">`) || !html.includes(`property="og:url" content="${base}"`)) throw new Error('Live canonical/social URL mismatch');
   if (!files.find(file => file.path === 'sitemap.xml').text.includes(`<loc>${base}</loc>`)) throw new Error('Live sitemap URL mismatch');
   const localConfig = await readFile('config.js', 'utf8');
   if (files.find(file => file.path === 'config.js').text.replace(/\r\n/g, '\n').trim() !== localConfig.replace(/\r\n/g, '\n').trim()) throw new Error('Live recipient configuration differs from source');
-  const report = { head, url: base, httpsEnforced: pages.https_enforced, workflow: { conclusion: run.conclusion, url: run.html_url }, files: files.map(({ text, ...file }) => file), checks: ['Deployed workflow succeeded for pushed commit', `All ${paths.length} public page/asset URLs returned HTTP 200`, 'All eight pages have correct live canonical and sitemap URLs', 'Accreditation reference link present', 'SVG, ICO, and Apple touch icon links present', 'Live Open Graph URL matches confirmed address', 'Live Contact page email links and recipient configuration match source'] };
+  const report = { head, url: base, httpsEnforced: pages.https_enforced, workflow: { conclusion: run.conclusion, url: run.html_url }, files: files.map(({ text, ...file }) => file), checks: ['Deployed workflow succeeded for pushed commit', `All ${paths.length} public page/asset URLs returned HTTP 200`, 'All eight pages have correct live canonical and sitemap URLs', 'Native accreditation content present with no Google Sites link or iframe', 'SVG, ICO, and Apple touch icon links present', 'Live Open Graph URL matches confirmed address', 'Live Contact page email links and recipient configuration match source'] };
   await writeFile('tests/deployment-results.json', JSON.stringify(report, null, 2));
   console.log(JSON.stringify(report, null, 2));
 }

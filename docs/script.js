@@ -112,6 +112,12 @@
   stageButtons.forEach(button => button.addEventListener('click', () => selectStage(button)));
   if (stageButtons.length) selectStage(stageButtons[0]);
 
+  const printProfile = document.querySelector('[data-print-profile]');
+  if (printProfile) {
+    printProfile.hidden = false;
+    printProfile.addEventListener('click', () => window.print());
+  }
+
   const form = document.querySelector('#inquiry-form');
   if (!form) return;
   const status = document.querySelector('#form-status');

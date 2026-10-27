@@ -1,5 +1,7 @@
 # GitHub Pages deployment
 
+The Accreditation page is now native content, not a link to Google Sites. Its profile, professional framework, source-ID context, and print action are documented in `NATIVE-ACCREDITATION-AUDIT.md`. This supersedes earlier external-reference implementation notes.
+
 The current eight-page architecture and accreditation reference are documented in `MULTIPAGE-AUDIT.md`. Build with `npm run prepare:publish`; all public pages are served from `docs/`.
 
 The latest editorial redesign, public email display, borderless animated menu, local fonts, and supporting image are documented in `REFINEMENT-AUDIT.md` and `ASSETS.md`. These supersede the earlier design/asset notes below.

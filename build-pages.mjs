@@ -1,6 +1,6 @@
 // Generate complete static pages from preserved, editable portfolio content.
 import { readFile, writeFile } from 'node:fs/promises';
-import { PAGES, SITE_URL, ACCREDITATION_URL } from './site-pages.mjs';
+import { PAGES, SITE_URL } from './site-pages.mjs';
 const source = await readFile('content/portfolio.html','utf8');
 const sectionMatches = [...source.matchAll(/<section\b[^>]*>[\s\S]*?<\/section>/g)];
 const sections = new Map(sectionMatches.map(match=>[match[0].match(/\bid="([^"]+)"/)?.[1],match[0]]));
@@ -18,7 +18,7 @@ const overview = `<section class="section home-overview"><div class="wrap"><div 
   ['global-rights.html','02','Global & subsidiary rights','International editions, translation, audio, and applicable licensing opportunities.'],
   ['film-television.html','03','Film & television','Consideration of literary properties for potential adaptation.']
 ].map(([file,number,title,description])=>`<a class="overview-link reveal" href="${file}"><span class="number">${number}</span><h3>${title}</h3><p>${description}</p><span aria-hidden="true">↗</span></a>`).join('')}</div></div></section>`;
-const accreditation = `<section class="section accreditation-reference" id="accreditation"><div class="wrap reference-grid"><div class="reveal"><p class="eyebrow">EXTERNAL REFERENCE</p><h2>Review the<br><em>provided source.</em></h2><p class="large-copy">The accreditation page supplied for this portfolio is available through the link below.</p><p>It opens on Google Sites in a new tab. For questions about the reference, contact Mike directly.</p><a class="text-link" href="contact.html">Ask Mike a question <span aria-hidden="true">↗</span></a></div><article class="reference-panel reveal"><span class="contact-label">GOOGLE SITES / EXTERNAL PAGE</span><h3>CAA accreditation page</h3><p>Source title: CAA – MIKE PETRO / CAA ACCREDITATION</p><a class="button gold" href="${ACCREDITATION_URL}" target="_blank" rel="noopener noreferrer">Open reference <span aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span></a><p class="reference-domain">sites.google.com</p><p class="reference-note">This link is provided for review. Listing it here is not independent verification of accreditation or an endorsement by CAA.</p></article></div></section>`;
+const accreditation = await readFile('content/accreditation.html','utf8');
 for(const page of PAGES){
   const canonical = SITE_URL+(page.key==='home'?'':page.file);
   let head=originalHead.replace(/<title>[\s\S]*?<\/title>/,`<title>${escape(page.title)}</title>`)

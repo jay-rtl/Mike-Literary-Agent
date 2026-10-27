@@ -176,3 +176,55 @@ input:focus,textarea:focus,select:focus{background:#ffffff09}
 @media(max-width:1100px){.site-header nav{gap:17px}.site-header nav a{font-size:10px}.chapter-cta .wrap,.reference-grid{gap:55px}.reference-panel{padding:32px}.overview-link{gap:20px}.overview-link h3{font-size:29px}}
 @media(max-width:850px){.js-nav #primary-nav a{font-size:31px}.reference-grid{gap:35px}.reference-panel{padding:28px}.reference-panel h3{font-size:34px}}
 @media(max-width:700px){.page-intro{padding:28px 0 48px}.breadcrumbs{margin-bottom:35px;font-size:9px}.page-intro h1{font-size:clamp(44px,11vw,65px);letter-spacing:-1px}.page-intro .eyebrow{font-size:7px;letter-spacing:1.2px}.chapter-cta{padding:48px 0}.chapter-cta .wrap{grid-template-columns:1fr;gap:25px}.chapter-cta h2{font-size:47px}.chapter-cta p:not(.eyebrow){font-size:12px}.service-navigation{gap:15px 23px;padding-block:17px}.service-navigation a{font-size:10px}.overview-link{grid-template-columns:25px 1fr 20px;gap:12px;padding:25px 0}.overview-link h3{font-size:29px}.overview-link p{grid-column:2;grid-row:2;font-size:12px}.overview-link>span:last-child{grid-column:3;grid-row:1}.overview-link .number{font-size:22px}.reference-grid{grid-template-columns:1fr;gap:35px}.reference-panel{padding:30px 24px}.reference-panel h3{font-size:35px}[data-page=about] .about{padding-top:60px}[data-page=contact] .contact{padding-top:35px}}
+
+.standards-layout{display:grid;grid-template-columns:1.2fr .8fr;gap:100px;align-items:start}
+.standards-copy>.reveal>p:not(.eyebrow):not(.large-copy){font-size:13px;line-height:1.9;color:var(--muted);max-width:560px}
+.standards-ledger{margin-top:45px}
+.standards-ledger article{display:grid;grid-template-columns:35px 1fr;gap:24px;padding:28px 0;border-top:1px solid var(--line)}
+.standards-ledger article:last-child{border-bottom:1px solid var(--line)}
+.standards-ledger h3{font-size:31px;margin:0 0 12px}
+.standards-ledger p{font-size:12px;line-height:1.95;color:var(--muted);margin:0}
+.profile-record{background:var(--navy);color:var(--ivory);padding:38px;border-top:2px solid var(--gold)}
+.profile-record .eyebrow{color:var(--champagne);font-size:8px}
+.profile-monogram{font:60px/1 var(--serif);color:var(--champagne);display:block;padding:15px 0 24px;border-bottom:1px solid #ffffff30;margin-bottom:27px}
+.profile-record h3{font-size:45px;margin-bottom:10px}
+.profile-role{font-size:12px;line-height:1.8;color:#c5cad3}
+.profile-record dl{margin:25px 0}
+.profile-record dl>div{padding:16px 0;border-bottom:1px solid #ffffff25}
+.profile-record dt{font-size:8px;text-transform:uppercase;letter-spacing:1.5px;color:var(--champagne);margin-bottom:8px}
+.profile-record dd{margin:0;font-size:12px;line-height:1.9;color:var(--ivory)}
+.profile-record .reference-id{letter-spacing:1.4px;font-size:13px}
+.profile-context{font-size:10px;line-height:1.9;color:#bfc5cf;margin-bottom:20px}
+.profile-record .text-link{color:var(--ivory);font-size:10px}
+.print-profile{display:flex;align-items:center;justify-content:space-between;gap:20px;background:none;color:#c5cad3;border:0;border-top:1px solid #ffffff30;width:100%;padding:20px 0 0;margin-top:27px;text-align:left;font-size:10px;min-height:44px}
+.print-profile:hover{color:var(--champagne)}
+.industry-context{background:var(--soft);padding:65px 0}
+.industry-context-grid{display:grid;grid-template-columns:1fr 1fr;gap:100px}
+.industry-context h2{font-size:49px;margin:0}
+.industry-context p:not(.eyebrow){font-size:12px;line-height:1.9;color:var(--muted)}
+.industry-context .context-caption{font-size:10px;margin:25px 0 0}
+@media(max-width:1100px){.standards-layout,.industry-context-grid{gap:55px}.profile-record{padding:30px}.standards-ledger h3{font-size:29px}}
+@media(max-width:850px){.standards-layout{gap:35px;grid-template-columns:1.1fr .9fr}.profile-record{padding:25px}.profile-record h3{font-size:39px}.standards-copy h2{font-size:48px}}
+@media(max-width:700px){.standards-layout,.industry-context-grid{grid-template-columns:1fr;gap:40px}.professional-standards{padding:55px 0}.standards-copy h2{font-size:45px}.standards-copy .large-copy{font-size:24px}.standards-ledger{margin-top:32px}.standards-ledger article{grid-template-columns:25px 1fr;gap:15px;padding:25px 0}.standards-ledger h3{font-size:29px}.profile-record{padding:30px 25px}.profile-record h3{font-size:42px}.industry-context{padding:50px 0}.industry-context h2{font-size:43px}.industry-context-grid{gap:25px}}
+@media print{
+  body[data-page=accreditation]{background:white;color:#20242b;font-size:10pt}
+  [data-page=accreditation] .site-header,[data-page=accreditation] footer,[data-page=accreditation] .chapter-cta,[data-page=accreditation] .back-top,[data-page=accreditation] .skip-link,[data-page=accreditation] .breadcrumbs,[data-page=accreditation] .print-profile{display:none!important}
+  [data-page=accreditation] .wrap{width:100%}
+  [data-page=accreditation] .page-intro{background:white;color:#20242b;padding:0 0 20px}
+  [data-page=accreditation] .page-intro h1{font-size:36pt}
+  [data-page=accreditation] .page-intro h1 em,[data-page=accreditation] .eyebrow{color:#79602a}
+  [data-page=accreditation] .professional-standards{padding:15px 0}
+  [data-page=accreditation] .standards-layout{display:block}
+  [data-page=accreditation] .standards-copy h2{font-size:26pt}
+  [data-page=accreditation] .standards-ledger{margin-top:20px}
+  [data-page=accreditation] .standards-ledger article{padding:12px 0;break-inside:avoid}
+  [data-page=accreditation] .standards-ledger h3{font-size:18pt}
+  [data-page=accreditation] .profile-record{background:white;color:#20242b;border:1px solid #d9d6cd;padding:20px;margin-top:25px;break-inside:avoid}
+  [data-page=accreditation] .profile-record p,[data-page=accreditation] .profile-record dd,[data-page=accreditation] .profile-record .text-link{color:#20242b}
+  [data-page=accreditation] .profile-record dt,[data-page=accreditation] .profile-monogram{color:#79602a}
+  [data-page=accreditation] .profile-monogram{font-size:30pt;padding:0 0 10px;margin-bottom:10px}
+  [data-page=accreditation] .industry-context{padding:25px 0;background:white}
+  [data-page=accreditation] .industry-context-grid{display:block}
+  [data-page=accreditation] .industry-context h2{font-size:22pt;margin-bottom:15px}
+  [data-page=accreditation] .reveal{opacity:1!important;transform:none!important;animation:none!important}
+}

@@ -4,3 +4,6 @@ tests/chrome-profile/
 *.zip
 reference-original.html
 tests/deployment-results.json
+tests/accreditation-source.html
+tests/accreditation-embed-source.html
+tests/*.pdf

@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { readFile, writeFile } from 'node:fs/promises';
-import { PAGES, SITE_URL, ACCREDITATION_URL } from '../site-pages.mjs';
+import { PAGES, SITE_URL } from '../site-pages.mjs';
 const base='http://127.0.0.1:4173/';
 const checks=[];
 const check=(name,condition)=>{assert.ok(condition,name);checks.push(name)};
@@ -31,8 +31,10 @@ for(const page of pages){
 }
 check('All internal page and fragment links resolve',true);
 const accreditation=htmlByFile.get('accreditation.html');
-check('Reference is linked without auto-embedding third-party content',accreditation.includes(`href="${ACCREDITATION_URL}" target="_blank" rel="noopener noreferrer"`)&&!accreditation.includes('<iframe'));
-check('Reference is not represented as independently verified accreditation',accreditation.includes('not independent verification of accreditation')&&!accreditation.includes('certified by CAA'));
+check('Accreditation content is native with no Google Sites link or iframe',!accreditation.includes('sites.google.com')&&!accreditation.includes('<iframe')&&accreditation.includes('class="standards-ledger"'));
+check('Native page contains six professional framework topics',accreditation.includes('Written scope &amp; authority')&&accreditation.includes('Confidential materials')&&accreditation.includes('Documented communication')&&accreditation.includes('Realistic expectations'));
+check('Supplied reference identifier is contextualized rather than certified',accreditation.includes('BKSTD2357400')&&accreditation.includes('not an independently verified accreditation number'));
+check('Industry context distinguishes independent profile from CAA-issued accreditation',accreditation.includes('not a certificate issued by Creative Artists Agency')&&accreditation.includes('https://www.caa.com/about-us'));
 check('Submission form exists only on the Contact page',pages.filter(page=>page.html.includes('id="inquiry-form"')).map(page=>page.key).join()==='contact');
 const tabs=await(await fetch('http://127.0.0.1:9222/json')).json();
 const ws=new WebSocket(tabs.find(tab=>tab.type==='page'&&!tab.url.startsWith('chrome')).webSocketDebuggerUrl);
@@ -62,6 +64,17 @@ for(const page of pages){
   if(page.key==='about'||page.key==='home'||page.key==='film'){
     await evaluate("document.querySelector('main img').scrollIntoView({behavior:'instant'})");await wait(300);
     check(`${page.file}: portrait/supporting image loads`,await evaluate("document.querySelector('main img').complete && document.querySelector('main img').naturalWidth>0"));
+  }
+  if(page.key==='accreditation'){
+    await evaluate("window.__printRequested=false;window.print=()=>{window.__printRequested=true};document.querySelector('[data-print-profile]').click()");
+    check('Print profile button invokes the browser print action',await evaluate('window.__printRequested'));
+    await cdp('Emulation.setEmulatedMedia',{media:'print',features:[{name:'prefers-reduced-motion',value:'reduce'}]});
+    check('Print layout hides navigation and preserves profile text',await evaluate("getComputedStyle(document.querySelector('.site-header')).display==='none' && getComputedStyle(document.querySelector('.profile-record')).display!=='none' && getComputedStyle(document.querySelector('.standards-copy .reveal')).opacity==='1'"));
+    const pdf=await cdp('Page.printToPDF',{printBackground:true,paperWidth:8.5,paperHeight:11,marginTop:.4,marginBottom:.4,marginLeft:.4,marginRight:.4});
+    const bytes=Buffer.from(pdf.data,'base64');
+    check('Native profile renders a nonempty printable PDF',bytes.length>5000&&bytes.subarray(0,4).toString()==='%PDF');
+    await writeFile('tests/accreditation-print.pdf',bytes);
+    await cdp('Emulation.setEmulatedMedia',{media:'screen',features:[{name:'prefers-reduced-motion',value:'reduce'}]});
   }
 }
 for(const [fragment,target] of [['about','about.html'],['rights','global-rights.html'],['contact','contact.html'],['process','for-authors.html']]){

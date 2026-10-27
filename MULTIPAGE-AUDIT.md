@@ -1,5 +1,7 @@
 # Multipage website and accreditation reference
 
+Historical architecture audit: the external-reference implementation below has since been replaced by native page content. See `NATIVE-ACCREDITATION-AUDIT.md` for the current accreditation page.
+
 Date: October 26, 2026 (America/Chicago).
 
 ## 1. Implemented
