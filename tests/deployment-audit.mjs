@@ -59,10 +59,12 @@ else {
   }));
   for(const old of oldLinks)if(old.status==='rejected')throw old.reason;
   const slashless=await fetch(base+'representation');
-  if(!slashless.ok||slashless.url!==base+'representation/')throw new Error('Slashless representation URL did not resolve to its clean directory');
+  const slashlessBody=await slashless.text();
+  const servesForwardingDocument=slashlessBody.includes('data-target="representation/"')&&slashlessBody.includes(`<link rel="canonical" href="${base}representation/">`);
+  if(!slashless.ok||(slashless.url!==base+'representation/'&&!servesForwardingDocument))throw new Error('Slashless representation URL neither resolves nor forwards to its clean directory');
   const localConfig = await readFile('config.js', 'utf8');
   if (files.find(file => file.path === 'config.js').text.replace(/\r\n/g, '\n').trim() !== localConfig.replace(/\r\n/g, '\n').trim()) throw new Error('Live recipient configuration differs from source');
-  const report = { head, url: base, httpsEnforced: pages.https_enforced, workflow: { conclusion: run.conclusion, url: run.html_url }, files: files.map(({ text, ...file }) => file), checks: ['Deployed workflow succeeded for pushed commit', `All ${paths.length} public page/asset URLs returned HTTP 200`, 'All eight pages have clean canonical and sitemap URLs', 'Seven legacy .html URLs provide forwarding and matching canonical targets', 'Slashless representation URL resolves to its clean directory', 'Native accreditation content present with no Google Sites link or iframe', 'SVG, ICO, and Apple touch icon links present', 'Live Open Graph URL matches confirmed address', 'Live Contact page email links and recipient configuration match source'] };
+  const report = { head, url: base, httpsEnforced: pages.https_enforced, workflow: { conclusion: run.conclusion, url: run.html_url }, files: files.map(({ text, ...file }) => file), checks: ['Deployed workflow succeeded for pushed commit', `All ${paths.length} public page/asset URLs returned HTTP 200`, 'All eight pages have clean canonical and sitemap URLs', 'Seven legacy .html URLs provide forwarding and matching canonical targets', 'Slashless representation URL resolves or forwards to its clean directory', 'Native accreditation content present with no Google Sites link or iframe', 'SVG, ICO, and Apple touch icon links present', 'Live Open Graph URL matches confirmed address', 'Live Contact page email links and recipient configuration match source'] };
   await writeFile('tests/deployment-results.json', JSON.stringify(report, null, 2));
   console.log(JSON.stringify(report, null, 2));
 }

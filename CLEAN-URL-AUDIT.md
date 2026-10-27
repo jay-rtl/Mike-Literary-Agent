@@ -44,6 +44,8 @@ Windows, local preview server, headless Chrome via CDP:
 
 On GitHub Pages the old `.html` aliases are HTTP 200 forwarding documents with client/meta refresh rather than server-configurable 301 responses. Query/fragment preservation and `index.html` URL normalization require JavaScript; without it, the legacy meta-refresh/link still leads to the clean destination but may not retain parameters. All clean directory pages work directly without JavaScript.
 
+Live hosting inspection also found that a manually typed `/representation` can serve the same forwarding document through GitHub Pages' extension lookup, rather than issuing an HTTP trailing-slash redirect. Its target and canonical are `/representation/`. All navigation uses the trailing-slash directory URL directly. Deployment verification accepts either a host redirect or this valid forwarding response; it does not treat HTTP fetch as executing client-side navigation.
+
 Physical devices/other browsers, actual email delivery, physical printing, full accessibility, and measured performance retain their prior limitations. No content or credential claims changed.
 
 ## 6. Launch readiness
