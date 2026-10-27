@@ -1,5 +1,6 @@
 // Generate complete static pages from preserved, editable portfolio content.
-import { readFile, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { dirname } from 'node:path';
 import { PAGES, SITE_URL } from './site-pages.mjs';
 const source = await readFile('content/portfolio.html','utf8');
 const sectionMatches = [...source.matchAll(/<section\b[^>]*>[\s\S]*?<\/section>/g)];
@@ -19,8 +20,19 @@ const overview = `<section class="section home-overview"><div class="wrap"><div 
   ['film-television.html','03','Film & television','Consideration of literary properties for potential adaptation.']
 ].map(([file,number,title,description])=>`<a class="overview-link reveal" href="${file}"><span class="number">${number}</span><h3>${title}</h3><p>${description}</p><span aria-hidden="true">↗</span></a>`).join('')}</div></div></section>`;
 const accreditation = await readFile('content/accreditation.html','utf8');
+const staticFiles = new Set(['styles.css','editorial.css','accreditation.css','config.js','script.js','routing.js']);
+function cleanPageLinks(html,page) {
+  const prefix=page.key==='home'?'':'../';
+  return html.replace(/\b(href|src)="([^"]+)"/g,(match,attribute,value)=>{
+    const [file,fragment]=value.split('#');
+    const target=PAGES.find(candidate=>candidate.file===file);
+    if(target)return `${attribute}="${prefix+target.path || './'}${fragment?'#'+fragment:''}"`;
+    if(staticFiles.has(value)||value.startsWith('assets/'))return `${attribute}="${prefix}${value}"`;
+    return match;
+  }).replace(/srcset="([^"]+)"/g,(match,value)=>`srcset="${value.replace(/(^|,\s*)assets\//g,`$1${prefix}assets/`)}"`);
+}
 for(const page of PAGES){
-  const canonical = SITE_URL+(page.key==='home'?'':page.file);
+  const canonical = SITE_URL+page.path;
   let head=originalHead.replace(/<title>[\s\S]*?<\/title>/,`<title>${escape(page.title)}</title>`)
     .replace(/(<meta name="description" content=")[^"]+/,`$1${escape(page.description)}`)
     .replace(/(<link rel="canonical" href=")[^"]+/,`$1${canonical}`)
@@ -30,6 +42,7 @@ for(const page of PAGES){
     .replace(/(<meta name="twitter:title" content=")[^"]+/,`$1${escape(page.title)}`)
     .replace(/(<meta name="twitter:description" content=")[^"]+/,`$1${escape(page.description)}`);
   if(page.key==='accreditation')head=head.replace('</head>','  <link rel="stylesheet" href="accreditation.css">\n</head>');
+  head=head.replace('<script src="config.js"','<script src="routing.js" defer></script>\n  <script src="config.js"');
   const nav = navigation.map(([key,label])=>{
     const target=PAGES.find(candidate=>candidate.key===key);
     return `<a href="${target.file}"${key===page.key?' aria-current="page"':''}${key==='contact'?' class="nav-contact"':''}>${label}${key==='contact'?' <span aria-hidden="true">↗</span>':''}</a>`;
@@ -52,7 +65,10 @@ for(const page of PAGES){
     if(id==='main'||id==='top'||page.sections.includes(id))return match;
     return routes.has(id)?`href="${routes.get(id)}#${id}"`:match;
   });
-  await writeFile(page.file,`${head}<body id="top" data-page="${page.key}">\n<a class="skip-link" href="#main">Skip to content</a>\n${header}\n<main id="main">${content}</main>\n${footer}\n<a class="back-top" href="#top" aria-label="Back to top" hidden>↑</a>\n</body>\n</html>\n`);
+  const html=cleanPageLinks(`${head}<body id="top" data-page="${page.key}">\n<a class="skip-link" href="#main">Skip to content</a>\n${header}\n<main id="main">${content}</main>\n${footer}\n<a class="back-top" href="#top" aria-label="Back to top" hidden>↑</a>\n</body>\n</html>\n`,page);
+  await mkdir(dirname(page.output),{recursive:true});
+  await writeFile(page.output,html);
+  if(page.key!=='home')await writeFile(page.file,`<!doctype html>\n<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${escape(page.label)} | Page moved</title><link rel="canonical" href="${canonical}"><meta http-equiv="refresh" content="1; url=${page.path}"><script src="routing.js" data-target="${page.path}"></script></head><body><p>This page has moved to <a href="${page.path}">${escape(page.label)}</a>.</p></body></html>\n`);
 }
-await writeFile('sitemap.xml',`<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${PAGES.map(page=>`  <url><loc>${SITE_URL}${page.key==='home'?'':page.file}</loc></url>`).join('\n')}\n</urlset>\n`);
+await writeFile('sitemap.xml',`<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${PAGES.map(page=>`  <url><loc>${SITE_URL}${page.path}</loc></url>`).join('\n')}\n</urlset>\n`);
 console.log(`Generated ${PAGES.length} standalone pages and sitemap.`);

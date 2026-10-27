@@ -8,4 +8,8 @@ export const PAGES = [
   { key:'authors', file:'for-authors.html', label:'For Authors', title:'For Authors: Process & Submission FAQs | Mike Petro', description:'Review projects considered, materials to prepare, the four-stage representation process, and frequently asked submission questions.', heading:'Begin with<br><em>your manuscript.</em>', sections:['authors','process','faq'] },
   { key:'accreditation', file:'accreditation.html', label:'Accreditation', title:'Mike Petro | Independent Industry Reference', description:'A concise, printable professional profile for Mike Petro, independent literary and film rights agent, with representation terms and supplied reference details.', sections:[] },
   { key:'contact', file:'contact.html', label:'Contact', title:'Contact Mike Petro | Literary Representation Inquiries', description:'Contact Mike Petro at mike.literaryagent@gmail.com or (332) 208-5295. Prepare a literary inquiry and review and send it in your own email app.', heading:'Start a<br><em>conversation.</em>', sections:['contact'] }
-];
+].map(page => ({
+  ...page,
+  path: page.key === 'home' ? '' : page.file.replace(/\.html$/, '/'),
+  output: page.key === 'home' ? 'index.html' : page.file.replace(/\.html$/, '/index.html')
+}));

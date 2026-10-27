@@ -1,5 +1,7 @@
 # GitHub Pages deployment
 
+Public routes now use clean directory URLs, such as `/representation/`, with forwarding documents for old `.html` links. See `CLEAN-URL-AUDIT.md` for migration, regression, and live verification details.
+
 The reference page now uses a shorter red-accented photographic layout and a verified single-page A4 print stylesheet. See `COMPACT-REFERENCE-AUDIT.md` for the current delivery and print checks.
 
 The Accreditation page is now native content, not a link to Google Sites. Its profile, professional framework, source-ID context, and print action are documented in `NATIVE-ACCREDITATION-AUDIT.md`. This supersedes earlier external-reference implementation notes.

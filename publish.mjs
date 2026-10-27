@@ -3,7 +3,8 @@ import { mkdir, copyFile, cp } from 'node:fs/promises';
 import { PAGES } from './site-pages.mjs';
 import './build-pages.mjs';
 await mkdir('docs', { recursive: true });
-for (const file of [...PAGES.map(page=>page.file), 'styles.css', 'editorial.css', 'accreditation.css', 'script.js', 'config.js', 'robots.txt', 'sitemap.xml']) {
+for (const file of [...new Set(PAGES.flatMap(page=>[page.file,page.output])), 'styles.css', 'editorial.css', 'accreditation.css', 'script.js', 'routing.js', 'config.js', 'robots.txt', 'sitemap.xml']) {
+  await mkdir(`docs/${file.split('/').slice(0,-1).join('/')}`,{recursive:true});
   try { await copyFile(file, `docs/${file}`); }
   catch (error) { if (file !== 'sitemap.xml' || error.code !== 'ENOENT') throw error; }
 }

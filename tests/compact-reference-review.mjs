@@ -9,7 +9,7 @@ const evaluate=async expression=>(await cdp('Runtime.evaluate',{expression,retur
 await cdp('Page.enable');await cdp('Runtime.enable');
 await cdp('Emulation.setEmulatedMedia',{features:[{name:'prefers-reduced-motion',value:'reduce'}]});
 await cdp('Emulation.setDeviceMetricsOverride',{width:794,height:1123,deviceScaleFactor:1,mobile:false});
-await cdp('Page.navigate',{url:'http://127.0.0.1:4173/accreditation.html'});await new Promise(resolve=>setTimeout(resolve,500));
+await cdp('Page.navigate',{url:'http://127.0.0.1:4173/accreditation/'});await new Promise(resolve=>setTimeout(resolve,500));
 await evaluate('document.fonts.ready');
 await cdp('Emulation.setEmulatedMedia',{media:'print',features:[{name:'prefers-reduced-motion',value:'reduce'}]});
 const shot=await cdp('Page.captureScreenshot',{format:'png'});await writeFile('tests/reference-print-layout.png',Buffer.from(shot.data,'base64'));

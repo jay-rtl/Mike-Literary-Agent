@@ -7,8 +7,12 @@ const types = { '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=
 createServer(async (req, res) => {
   try {
     const pathname = decodeURIComponent(new URL(req.url, 'http://localhost').pathname);
-    const file = resolve(root, '.' + (pathname === '/' ? '/index.html' : pathname));
-    if (!file.startsWith(root + sep) || ![...PAGES.map(page=>page.file), 'styles.css', 'editorial.css', 'accreditation.css', 'config.js', 'script.js', 'robots.txt', 'sitemap.xml'].includes(file.slice(root.length + 1)) && !file.startsWith(resolve(root, 'assets') + sep)) {
+    const page = PAGES.find(page=>pathname===`/${page.path}`);
+    const missingSlash=PAGES.find(page=>page.path&&pathname===`/${page.path.slice(0,-1)}`);
+    if(missingSlash){res.writeHead(301,{Location:`/${missingSlash.path}${new URL(req.url,'http://localhost').search}`}).end();return;}
+    const file = resolve(root, page ? page.output : '.'+pathname);
+    const relative=file.slice(root.length+1).split(sep).join('/');
+    if (!file.startsWith(root + sep) || ![...PAGES.flatMap(page=>[page.file,page.output]), 'styles.css', 'editorial.css', 'accreditation.css', 'config.js', 'script.js', 'routing.js', 'robots.txt', 'sitemap.xml'].includes(relative) && !file.startsWith(resolve(root, 'assets') + sep)) {
       res.writeHead(404).end('Not found'); return;
     }
     const body = await readFile(file);

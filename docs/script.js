@@ -2,10 +2,10 @@
   'use strict';
   // Preserve links shared before the portfolio became a multipage site.
   const legacySections = {
-    about:'about.html#about', representation:'representation.html#representation',
-    rights:'global-rights.html#rights', film:'film-television.html#film',
-    authors:'for-authors.html#authors', process:'for-authors.html#process',
-    faq:'for-authors.html#faq', experiences:'about.html#experiences', contact:'contact.html#contact'
+    about:'about/#about', representation:'representation/#representation',
+    rights:'global-rights/#rights', film:'film-television/#film',
+    authors:'for-authors/#authors', process:'for-authors/#process',
+    faq:'for-authors/#faq', experiences:'about/#experiences', contact:'contact/#contact'
   };
   function resolveLegacySection() {
     const target = legacySections[location.hash.slice(1)];

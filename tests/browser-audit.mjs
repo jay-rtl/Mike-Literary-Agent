@@ -21,7 +21,7 @@ const result={environment:'Chrome headless, Windows, CDP',checks:[],layouts:[]};
 function check(name,value){assert.ok(value,name);result.checks.push(name);}
 await cdp('Page.enable'); await cdp('Runtime.enable'); await cdp('Network.enable'); await cdp('Log.enable');
 await cdp('Emulation.setDeviceMetricsOverride',{width:1440,height:1000,deviceScaleFactor:1,mobile:false});
-await cdp('Page.navigate',{url:'http://127.0.0.1:4173/contact.html'}); await delay(1000);
+await cdp('Page.navigate',{url:'http://127.0.0.1:4173/contact/'}); await delay(1000);
 check('Title and description',await evaluate("document.title.includes('Mike Petro') && document.querySelector('meta[name=description]').content.length>50"));
 check('All internal anchor destinations exist',await evaluate("[...document.querySelectorAll('a[href^=\"#\"]')].every(a=>document.getElementById(a.hash.slice(1)))"));
 check('Email displayed in contact and footer with correct mailto links',await evaluate("[...document.querySelectorAll('.email-link,.footer-email')].length===2 && [...document.querySelectorAll('.email-link,.footer-email')].every(a=>a.getAttribute('href')==='mailto:mike.literaryagent@gmail.com' && a.textContent.includes('mike.literaryagent@gmail.com'))"));
@@ -51,7 +51,7 @@ await evaluate("window.__clipboard=Object.getOwnPropertyDescriptor(Navigator.pro
 check('Clipboard unavailable: select-text fallback works',await evaluate("document.activeElement.id==='prepared-message' && document.querySelector('#prepared-message').selectionEnd===document.querySelector('#prepared-message').value.length"));
 await evaluate("document.querySelector('#message').value='Revised';document.querySelector('#message').dispatchEvent(new Event('input',{bubbles:true}))");
 check('Edits invalidate previous draft',await evaluate("document.querySelector('#email-fallback').hidden"));
-await cdp('Page.navigate',{url:'http://127.0.0.1:4173/for-authors.html'}); await delay(500);
+await cdp('Page.navigate',{url:'http://127.0.0.1:4173/for-authors/'}); await delay(500);
 await evaluate("document.querySelector('[data-stage=\"03\"]').click()");
 check('Interactive stages update state and content',await evaluate("document.querySelector('[data-stage=\"03\"]').getAttribute('aria-expanded')==='true' && !document.querySelector('#process-03').hidden && document.querySelector('#process-01').hidden"));
 await evaluate("document.querySelector('summary').focus()");
@@ -71,7 +71,7 @@ check('Mobile navigation opens',await evaluate("document.querySelector('.menu-to
 check('Mobile toggle has no border and animated icon enters close state',await evaluate("getComputedStyle(document.querySelector('.menu-toggle')).borderTopWidth==='0px' && document.querySelector('.menu-label').textContent==='Close' && document.querySelector('.menu-toggle').getAttribute('aria-label')==='Close navigation menu'"));
 await cdp('Input.dispatchKeyEvent',{type:'keyDown',key:'Escape',code:'Escape',windowsVirtualKeyCode:27});
 check('Escape closes navigation and returns focus',await evaluate("document.querySelector('.menu-toggle').getAttribute('aria-expanded')==='false' && document.activeElement.classList.contains('menu-toggle')"));
-await evaluate("document.querySelector('.menu-toggle').click();document.querySelector('#primary-nav a[href=\"about.html\"]').click()");await delay(500);
+await evaluate("document.querySelector('.menu-toggle').click();document.querySelector('#primary-nav a[href=\"about/\"]').click()");await delay(500);
 check('Mobile link navigates to the About page with a closed menu',await evaluate("document.body.dataset.page==='about' && document.querySelector('.menu-toggle').getAttribute('aria-expanded')==='false'"));
 await cdp('Page.navigate',{url:'http://127.0.0.1:4173/'}); await delay(500);
 await cdp('Emulation.setEmulatedMedia',{features:[{name:'prefers-reduced-motion',value:'reduce'}]});
@@ -80,10 +80,10 @@ check('Reduced motion disables animation and smooth scrolling',await evaluate("g
 await evaluate("scrollTo({top:2000,behavior:'instant'})");await delay(200);
 check('Back to top appears after scrolling',await evaluate("!document.querySelector('.back-top').hidden"));
 // No JavaScript: primary content and navigation remain available.
-await cdp('Page.navigate',{url:'http://127.0.0.1:4173/for-authors.html'});await delay(300);
+await cdp('Page.navigate',{url:'http://127.0.0.1:4173/for-authors/'});await delay(300);
 await cdp('Emulation.setScriptExecutionDisabled',{value:true});await cdp('Page.reload');await delay(500);
 check('No-JavaScript navigation, content, and all process stages remain visible',await evaluate("getComputedStyle(document.querySelector('#primary-nav')).display!=='none' && document.querySelectorAll('.process-panels article').length===4 && [...document.querySelectorAll('.process-panels article')].every(a=>!a.hidden) && getComputedStyle(document.querySelector('.author-genres')).opacity==='1'"));
-await cdp('Page.navigate',{url:'http://127.0.0.1:4173/contact.html'});await delay(500);
+await cdp('Page.navigate',{url:'http://127.0.0.1:4173/contact/'});await delay(500);
 check('No-JavaScript form cannot submit personal data through a GET request',await evaluate("document.querySelector('#inquiry-form [type=submit]').disabled"));
 await cdp('Emulation.setScriptExecutionDisabled',{value:false});
 // Production page makes only local static requests; no inquiry transmission.

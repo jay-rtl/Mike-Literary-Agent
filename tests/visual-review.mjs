@@ -13,7 +13,7 @@ for(const width of [1440,390]){
  await call('Emulation.setDeviceMetricsOverride',{width,height:1000,deviceScaleFactor:1,mobile:false});
  for(const section of ['about','representation','rights','film','authors','process','faq','contact']){
   const page=PAGES.find(page=>page.sections.includes(section));
-  await call('Page.navigate',{url:`http://127.0.0.1:4173/${page.file}`});
+  await call('Page.navigate',{url:`http://127.0.0.1:4173/${page.path}`});
   await new Promise(r=>setTimeout(r,250));
   await run(`document.getElementById('${section}').scrollIntoView({behavior:'instant'})`);
   await new Promise(r=>setTimeout(r,100));
