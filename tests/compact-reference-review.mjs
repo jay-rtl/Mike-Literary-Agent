@@ -1,0 +1,26 @@
+import assert from 'node:assert/strict';
+import {writeFile} from 'node:fs/promises';
+const tabs=await(await fetch('http://127.0.0.1:9222/json')).json();
+const ws=new WebSocket(tabs.find(tab=>tab.type==='page'&&!tab.url.startsWith('chrome')).webSocketDebuggerUrl);
+await new Promise(resolve=>ws.addEventListener('open',resolve,{once:true}));
+let id=0;const pending=new Map();ws.onmessage=event=>{const data=JSON.parse(event.data);if(data.id){pending.get(data.id)(data.result);pending.delete(data.id)}};
+const cdp=(method,params={})=>new Promise(resolve=>{pending.set(++id,resolve);ws.send(JSON.stringify({id,method,params}))});
+const evaluate=async expression=>(await cdp('Runtime.evaluate',{expression,returnByValue:true,awaitPromise:true})).result.value;
+await cdp('Page.enable');await cdp('Runtime.enable');
+await cdp('Emulation.setEmulatedMedia',{features:[{name:'prefers-reduced-motion',value:'reduce'}]});
+await cdp('Emulation.setDeviceMetricsOverride',{width:794,height:1123,deviceScaleFactor:1,mobile:false});
+await cdp('Page.navigate',{url:'http://127.0.0.1:4173/accreditation.html'});await new Promise(resolve=>setTimeout(resolve,500));
+await evaluate('document.fonts.ready');
+await cdp('Emulation.setEmulatedMedia',{media:'print',features:[{name:'prefers-reduced-motion',value:'reduce'}]});
+const shot=await cdp('Page.captureScreenshot',{format:'png'});await writeFile('tests/reference-print-layout.png',Buffer.from(shot.data,'base64'));
+await cdp('Emulation.setEmulatedMedia',{media:'screen',features:[{name:'prefers-reduced-motion',value:'reduce'}]});
+await cdp('Emulation.setDeviceMetricsOverride',{width:390,height:844,deviceScaleFactor:1,mobile:false});
+await evaluate("document.querySelector('.menu-toggle').click()");await new Promise(resolve=>setTimeout(resolve,150));
+assert.equal(await evaluate("getComputedStyle(document.querySelector('.menu-toggle')).borderTopWidth"),'0px');
+const menu=await cdp('Page.captureScreenshot',{format:'png'});await writeFile('tests/reference-mobile-menu.png',Buffer.from(menu.data,'base64'));
+function lum(hex){const c=hex.match(/[a-f\d]{2}/gi).map(x=>parseInt(x,16)/255).map(v=>v<=.04045?v/12.92:((v+.055)/1.055)**2.4);return c[0]*.2126+c[1]*.7152+c[2]*.0722}
+const pairs=[['red/white','#bd182c','#ffffff'],['body/white','#5e6268','#ffffff'],['secondary CTA/white','#aa1024','#ffffff']];
+const contrast=pairs.map(([name,a,b])=>({name,ratio:(Math.max(lum(a),lum(b))+.05)/(Math.min(lum(a),lum(b))+.05)}));
+assert.ok(contrast.every(pair=>pair.ratio>=4.5));
+console.log(JSON.stringify({checks:['Borderless mobile toggle preserved','Three sampled text/background pairs pass AA'],contrast},null,2));
+ws.close();

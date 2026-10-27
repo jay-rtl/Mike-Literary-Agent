@@ -31,10 +31,10 @@ for(const page of pages){
 }
 check('All internal page and fragment links resolve',true);
 const accreditation=htmlByFile.get('accreditation.html');
-check('Accreditation content is native with no Google Sites link or iframe',!accreditation.includes('sites.google.com')&&!accreditation.includes('<iframe')&&accreditation.includes('class="standards-ledger"'));
-check('Native page contains six professional framework topics',accreditation.includes('Written scope &amp; authority')&&accreditation.includes('Confidential materials')&&accreditation.includes('Documented communication')&&accreditation.includes('Realistic expectations'));
+check('Accreditation content is native with no Google Sites link or iframe',!accreditation.includes('sites.google.com')&&!accreditation.includes('<iframe')&&accreditation.includes('class="credential-hero"'));
+check('Compact page retains written terms, author interests, and independent context',accreditation.includes('WRITTEN TERMS')&&accreditation.includes('AUTHOR INTERESTS')&&accreditation.includes('INDEPENDENT PROFILE'));
 check('Supplied reference identifier is contextualized rather than certified',accreditation.includes('BKSTD2357400')&&accreditation.includes('not an independently verified accreditation number'));
-check('Industry context distinguishes independent profile from CAA-issued accreditation',accreditation.includes('not a certificate issued by Creative Artists Agency')&&accreditation.includes('https://www.caa.com/about-us'));
+check('Industry context distinguishes independent profile from CAA-issued accreditation',accreditation.includes('not a CAA-issued certificate')&&accreditation.includes('https://www.caa.com/about-us'));
 check('Submission form exists only on the Contact page',pages.filter(page=>page.html.includes('id="inquiry-form"')).map(page=>page.key).join()==='contact');
 const tabs=await(await fetch('http://127.0.0.1:9222/json')).json();
 const ws=new WebSocket(tabs.find(tab=>tab.type==='page'&&!tab.url.startsWith('chrome')).webSocketDebuggerUrl);
@@ -66,13 +66,14 @@ for(const page of pages){
     check(`${page.file}: portrait/supporting image loads`,await evaluate("document.querySelector('main img').complete && document.querySelector('main img').naturalWidth>0"));
   }
   if(page.key==='accreditation'){
-    await evaluate("window.__printRequested=false;window.print=()=>{window.__printRequested=true};document.querySelector('[data-print-profile]').click()");
-    check('Print profile button invokes the browser print action',await evaluate('window.__printRequested'));
+    await evaluate("window.__printRequested=0;window.print=()=>{window.__printRequested++};document.querySelectorAll('[data-print-profile]').forEach(button=>button.click())");
+    check('Both print buttons invoke the browser print action',await evaluate('window.__printRequested===2'));
     await cdp('Emulation.setEmulatedMedia',{media:'print',features:[{name:'prefers-reduced-motion',value:'reduce'}]});
-    check('Print layout hides navigation and preserves profile text',await evaluate("getComputedStyle(document.querySelector('.site-header')).display==='none' && getComputedStyle(document.querySelector('.profile-record')).display!=='none' && getComputedStyle(document.querySelector('.standards-copy .reveal')).opacity==='1'"));
-    const pdf=await cdp('Page.printToPDF',{printBackground:true,paperWidth:8.5,paperHeight:11,marginTop:.4,marginBottom:.4,marginLeft:.4,marginRight:.4});
+    check('Print layout hides navigation and preserves profile text',await evaluate("getComputedStyle(document.querySelector('.site-header')).display==='none' && getComputedStyle(document.querySelector('.credential-card')).display!=='none' && getComputedStyle(document.querySelector('.credential-card')).opacity==='1'"));
+    const pdf=await cdp('Page.printToPDF',{printBackground:true,preferCSSPageSize:true});
     const bytes=Buffer.from(pdf.data,'base64');
     check('Native profile renders a nonempty printable PDF',bytes.length>5000&&bytes.subarray(0,4).toString()==='%PDF');
+    check('Printable reference fits on exactly one A4 page',(bytes.toString('latin1').match(/\/Type\s*\/Page\b/g)||[]).length===1);
     await writeFile('tests/accreditation-print.pdf',bytes);
     await cdp('Emulation.setEmulatedMedia',{media:'screen',features:[{name:'prefers-reduced-motion',value:'reduce'}]});
   }

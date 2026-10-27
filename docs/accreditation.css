@@ -1,0 +1,93 @@
+/* Compact industry-reference layout, scoped to its standalone page. */
+[data-page=accreditation]{--reference-red:#bd182c;background:#fff}
+[data-page=accreditation] .site-header,[data-page=accreditation] .site-header.is-scrolled{background:#fff;color:#20242b;border-color:#eeece6;box-shadow:none}
+[data-page=accreditation] .site-header nav a{color:#44484e}
+[data-page=accreditation] .site-header nav a:hover,[data-page=accreditation] .site-header nav a[aria-current]{color:var(--reference-red)}
+[data-page=accreditation] .site-header nav a::after{background:var(--reference-red)}
+[data-page=accreditation] .site-header nav .nav-contact{border-color:#bd182c55}
+[data-page=accreditation] .menu-icon i{background:#20242b}
+.js-nav [data-page=accreditation] #primary-nav .nav-contact{color:var(--reference-red)}
+[data-page=accreditation] a:focus-visible,[data-page=accreditation] button:focus-visible{outline-color:#bd182c}
+.credential-band{background:var(--reference-red);color:#fff}
+.credential-band .wrap{display:flex;justify-content:space-between;align-items:center;gap:20px;min-height:48px}
+.credential-band .wrap>span{font-size:11px;font-weight:600;letter-spacing:2px}
+.credential-band button{color:inherit;background:none;border:0;padding:12px 0;min-height:44px;font-size:10px;display:flex;gap:15px;align-items:center}
+.credential-hero{position:relative;isolation:isolate;background:#152436;color:#fff;overflow:hidden}
+.credential-background{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:-2}
+.credential-hero::after{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,#0b1521df 0%,#0b1521b8 55%,#0b15214a 100%)}
+.credential-layout{display:grid;grid-template-columns:1.4fr .7fr;gap:100px;align-items:center;padding-block:62px;min-height:690px}
+.credential-copy{max-width:740px;animation:editorial-enter .8s var(--ease) both}
+.credential-copy .eyebrow{font-size:9px;letter-spacing:2.1px;color:#fff;margin-bottom:25px}
+.credential-copy h1{font:500 clamp(60px,5.2vw,80px)/1.02 var(--serif);letter-spacing:-1.3px;margin-bottom:26px;text-wrap:balance}
+.credential-copy h1 em{font-style:normal;font-weight:400}
+.credential-copy>p:not(.eyebrow){max-width:550px;font-size:14px;line-height:1.95;color:#eef0f2;margin-bottom:30px}
+.credential-copy>p.credential-contact{font-size:10px;line-height:1.9;display:flex;gap:8px;flex-wrap:wrap;color:#eef0f2;margin-bottom:25px}
+.credential-contact a{text-decoration:none}
+.credential-contact a:hover{text-decoration:underline}
+.credential-actions{display:flex;flex-wrap:wrap;gap:13px}
+.credential-button{display:inline-flex;align-items:center;gap:22px;padding:13px 20px;min-height:44px;border-radius:30px;background:#fff;border:1px solid #fff;color:#aa1024;text-decoration:none;font-size:9px;font-weight:600;letter-spacing:.5px;transition:transform .25s,background .25s}
+.credential-button:hover{transform:translateY(-2px);background:#f4ecec}
+.credential-button.secondary{background:#ffffff0d;color:#fff;border-color:#ffffff80}
+.credential-button.secondary:hover{background:#ffffff20}
+.credential-card{margin:0;background:#fff;color:#20242b;border-radius:14px;overflow:hidden;box-shadow:0 18px 55px #00000030;max-width:370px;width:100%;justify-self:end}
+.credential-portrait{display:block;width:100%;height:310px;object-fit:cover;object-position:50% 25%}
+.credential-card-body{padding:20px 22px}
+.credential-card h2{font:600 25px/1.2 var(--sans);color:var(--reference-red);letter-spacing:-.5px;margin:0 0 6px}
+.credential-role{font-size:10px;line-height:1.7;color:#5e6268;margin-bottom:17px}
+.credential-id{border:1px solid #dedfe2;border-radius:6px;padding:12px 14px;margin:0 0 10px}
+.credential-id dt{font-size:7px;line-height:1.6;letter-spacing:1.5px;color:#656970;margin-bottom:5px}
+.credential-id dd{margin:0;font:600 15px/1.5 var(--sans);letter-spacing:1px}
+.credential-id-note{font-size:9px;line-height:1.8;color:#5e6268;margin:0}
+.credential-print{display:flex;justify-content:space-between;align-items:center;gap:25px;width:100%;min-height:44px;padding:11px 15px;margin-top:16px;background:var(--reference-red);color:#fff;border:0;border-radius:5px;font-size:11px;font-weight:600;transition:background .2s}
+.credential-print:hover{background:#9b1022}
+.credential-details{padding:39px 0 43px;background:#fff;color:#20242b}
+.credential-details .wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:50px}
+.credential-detail-number{font-size:8px;letter-spacing:1.4px;color:var(--reference-red)}
+.credential-details h2{font:500 31px/1.1 var(--serif);letter-spacing:-.3px;margin:12px 0}
+.credential-details p{font-size:11px;line-height:1.9;color:#5e6268;margin:0}
+.credential-details a{display:inline-block;color:var(--reference-red);font-size:10px;margin-top:10px}
+[data-page=accreditation] footer{padding-top:30px}
+[data-page=accreditation] .footer-nav{display:none}
+[data-page=accreditation] .footer-top .brand{font-size:28px}
+[data-page=accreditation] .footer-phone{font-size:24px}
+[data-page=accreditation] .disclaimer{font-size:9px;margin-top:20px}
+[data-page=accreditation] .footer-bottom{margin-top:20px;padding-top:18px}
+@media(max-width:1150px){.credential-layout{gap:55px;grid-template-columns:1.2fr .75fr}.credential-copy h1{font-size:66px}.credential-portrait{height:290px}.credential-card-body{padding:19px}.credential-copy>p:not(.eyebrow){font-size:13px}.credential-details .wrap{gap:30px}}
+@media(max-width:850px){.credential-layout{gap:35px;grid-template-columns:1.1fr .8fr;padding-block:45px}.credential-copy h1{font-size:57px}.credential-portrait{height:260px}.credential-card h2{font-size:22px}.credential-copy .eyebrow{font-size:8px;letter-spacing:1.3px}.credential-button{font-size:8px;padding:12px 17px;gap:15px}.credential-card-body{padding:17px}.credential-band .wrap>span{font-size:9px;letter-spacing:1.4px}.credential-details h2{font-size:28px}}
+@media(max-width:700px){.credential-band .wrap{gap:12px;min-height:48px}.credential-band .wrap>span{font-size:8px;letter-spacing:.9px;max-width:230px}.credential-band button{font-size:9px;white-space:nowrap;gap:8px}.credential-layout{grid-template-columns:1fr;gap:32px;min-height:0;padding-block:45px}.credential-copy h1{font-size:clamp(45px,11.5vw,65px);letter-spacing:-.8px;line-height:1.03}.credential-copy .eyebrow{font-size:7px;letter-spacing:1.3px;margin-bottom:22px}.credential-copy>p:not(.eyebrow){font-size:12px;line-height:1.95;margin-bottom:25px}.credential-copy{max-width:100%}.credential-card{max-width:350px;justify-self:center}.credential-portrait{height:290px;object-position:50% 25%}.credential-card-body{padding:21px}.credential-card h2{font-size:25px}.credential-details{padding:31px 0}.credential-details .wrap{grid-template-columns:1fr;gap:25px}.credential-details article+article{border-top:1px solid #e1e2e4;padding-top:25px}.credential-details h2{font-size:30px}.credential-details p{font-size:12px}.credential-background{object-position:65% center}.credential-hero::after{background:#0b1521c9}.credential-id dt{font-size:8px}}
+@media(max-width:370px){.credential-band .wrap>span{font-size:7px;letter-spacing:.5px}.credential-copy h1{font-size:44px}.credential-copy .eyebrow{font-size:6px}.credential-layout{padding-block:35px}.credential-portrait{height:265px}}
+@media print{
+  @page{size:A4 portrait;margin:12mm}
+  [data-page=accreditation]{background:#fff!important;color:#20242b!important;print-color-adjust:exact;-webkit-print-color-adjust:exact}
+  [data-page=accreditation] .site-header,[data-page=accreditation] footer,[data-page=accreditation] .back-top,[data-page=accreditation] .skip-link,[data-page=accreditation] [data-print-profile],.credential-actions{display:none!important}
+  [data-page=accreditation] .wrap{width:100%;max-width:none}
+  .credential-band{background:#fff;color:#bd182c;border-bottom:2px solid #bd182c}
+  .credential-band .wrap{min-height:0;padding:0 0 12px}
+  .credential-band .wrap>span{font-size:9pt;letter-spacing:1.2px;max-width:none}
+  .credential-hero{background:#fff;color:#20242b;overflow:visible}
+  .credential-background,.credential-hero::after{display:none!important}
+  .credential-layout{grid-template-columns:1.25fr .8fr;gap:25px;min-height:0;padding:25px 0 22px;align-items:center;break-inside:avoid}
+  .credential-copy{animation:none}
+  .credential-copy .eyebrow{font-size:6pt;color:#bd182c;letter-spacing:.8px;margin-bottom:15px}
+  .credential-copy h1{font-size:32pt;line-height:1.02;letter-spacing:-.6px;margin-bottom:18px}
+  .credential-copy>p:not(.eyebrow){font-size:9pt;color:#44484e;line-height:1.7;margin:0}
+  .credential-copy>p.credential-contact{font-size:7pt;color:#44484e;margin-top:13px;margin-bottom:0;gap:5px}
+  .credential-card{border:1px solid #d9dadd;border-radius:7px;box-shadow:none;break-inside:avoid}
+  .credential-portrait{height:52mm;object-position:50% 23%}
+  .credential-card-body{padding:13px}
+  .credential-card h2{font-size:14pt;letter-spacing:-.2px}
+  .credential-role{font-size:7pt;margin-bottom:10px}
+  .credential-id{padding:8px 9px;margin-bottom:8px}
+  .credential-id dt{font-size:5.5pt;letter-spacing:.7px}
+  .credential-id dd{font-size:9pt;letter-spacing:.7px}
+  .credential-id-note{font-size:6.5pt;line-height:1.6}
+  .credential-details{padding:18px 0 0;border-top:1px solid #ddd}
+  .credential-details .wrap{grid-template-columns:1fr;gap:15px}
+  .credential-details article{break-inside:avoid}
+  .credential-details article+article{padding:0;border:0}
+  .credential-detail-number{font-size:6pt;letter-spacing:1px}
+  .credential-details h2{font-size:16pt;margin:6px 0}
+  .credential-details p{font-size:8pt;line-height:1.6}
+  .credential-details a{font-size:7pt;margin-top:5px}
+  [data-page=accreditation] .reveal{opacity:1!important;transform:none!important;transition:none!important}
+}

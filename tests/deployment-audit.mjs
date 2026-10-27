@@ -27,7 +27,7 @@ if (!run || run.status !== 'completed') { process.exitCode = 2; }
 else if (run.conclusion !== 'success') { throw new Error('Deployment workflow failed'); }
 else {
   const base = pages.html_url;
-  const paths = [...PAGES.map(page=>page.key==='home'?'':page.file), 'styles.css', 'editorial.css', 'script.js', 'config.js', 'robots.txt', 'sitemap.xml', 'assets/mike-petro-hero-1100.jpg', 'assets/mike-petro-hero-550.jpg', 'assets/mike-petro-about-491.jpg', 'assets/mike-petro-about-246.jpg', 'assets/favicon.svg', 'assets/favicon.ico', 'assets/apple-touch-icon.png', 'assets/editorial-book-1440.jpg', 'assets/editorial-book-720.jpg', 'assets/fonts/cormorant-latin.woff2', 'assets/fonts/cormorant-italic-latin.woff2', 'assets/fonts/manrope-latin.woff2'];
+  const paths = [...PAGES.map(page=>page.key==='home'?'':page.file), 'styles.css', 'editorial.css', 'accreditation.css', 'script.js', 'config.js', 'robots.txt', 'sitemap.xml', 'assets/mike-petro-hero-1100.jpg', 'assets/mike-petro-hero-550.jpg', 'assets/mike-petro-about-491.jpg', 'assets/mike-petro-about-246.jpg', 'assets/favicon.svg', 'assets/favicon.ico', 'assets/apple-touch-icon.png', 'assets/editorial-book-1440.jpg', 'assets/editorial-book-720.jpg', 'assets/profile-atrium-1600.jpg', 'assets/profile-atrium-800.jpg', 'assets/fonts/cormorant-latin.woff2', 'assets/fonts/cormorant-italic-latin.woff2', 'assets/fonts/manrope-latin.woff2'];
   const responses = await Promise.allSettled(paths.map(async path => {
     const response = await fetch(base + path, { cache: 'no-store' });
     const bytes = new Uint8Array(await response.arrayBuffer());
@@ -46,7 +46,7 @@ else {
     if(!files.find(file=>file.path==='sitemap.xml').text.includes(`<loc>${canonical}</loc>`)) throw new Error(`Live sitemap missing: ${page.file}`);
   }
   const accreditation=files.find(file=>file.path==='accreditation.html').text;
-  if(accreditation.includes('sites.google.com')||accreditation.includes('<iframe')||!accreditation.includes('class="standards-ledger"')||!accreditation.includes('BKSTD2357400')) throw new Error('Live native accreditation content missing or still linked to Google Sites');
+  if(accreditation.includes('sites.google.com')||accreditation.includes('<iframe')||!accreditation.includes('class="credential-hero"')||!accreditation.includes('BKSTD2357400')) throw new Error('Live native accreditation content missing or still linked to Google Sites');
   if (!html.includes('href="editorial.css"')) throw new Error('Live editorial stylesheet missing');
   for (const icon of ['favicon.svg', 'favicon.ico', 'apple-touch-icon.png']) if (!html.includes(`href="assets/${icon}"`)) throw new Error(`Live icon link missing: ${icon}`);
   if (!html.includes(`<link rel="canonical" href="${base}">`) || !html.includes(`property="og:url" content="${base}"`)) throw new Error('Live canonical/social URL mismatch');

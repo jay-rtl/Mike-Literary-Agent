@@ -24,3 +24,16 @@ Cormorant Garamond (normal and italic variable Latin WOFF2) and Manrope (normal 
 ## Favicon
 
 Original code-authored MP monogram in SVG, ICO, and Apple touch PNG variants, matching the page palette.
+
+## Independent-profile architectural background
+
+Generated with the built-in image_gen tool, not the CLI fallback. The generated output was visually inspected and exported to responsive project assets:
+
+- `assets/profile-atrium-1600.jpg` (176,617 bytes)
+- `assets/profile-atrium-800.jpg` (56,731 bytes)
+
+This is an original illustrative office-atrium image, not Mike's actual office or a CAA building. It has no logo, signage, or agency identifiers. The existing real portrait was not regenerated or altered.
+
+Final generation prompt:
+
+> Original architectural editorial photograph, wide 16:9 landscape, generic contemporary professional office atrium at blue hour. Full-height glass curtain walls, dark navy metal mullions, pale textured stone wall, soft recessed downlights, reflective stone floor, quiet sophisticated atmosphere. View across an empty lobby, with dark negative space in left and central two thirds for a white typography overlay. Subtle cool blue daylight in the right third. Realistic restrained photography, no people, no logos, no signage, no text, no seals, no identifiable real company office or landmark, no distinctive trademarked architecture. It should feel like a real architectural magazine photo, not a fantasy render, with natural materials and straight perspective. Intended as an atmospheric background for an independent literary agent's profile, not evidence of a real office or affiliation.

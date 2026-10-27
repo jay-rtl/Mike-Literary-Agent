@@ -1,5 +1,7 @@
 # GitHub Pages deployment
 
+The reference page now uses a shorter red-accented photographic layout and a verified single-page A4 print stylesheet. See `COMPACT-REFERENCE-AUDIT.md` for the current delivery and print checks.
+
 The Accreditation page is now native content, not a link to Google Sites. Its profile, professional framework, source-ID context, and print action are documented in `NATIVE-ACCREDITATION-AUDIT.md`. This supersedes earlier external-reference implementation notes.
 
 The current eight-page architecture and accreditation reference are documented in `MULTIPAGE-AUDIT.md`. Build with `npm run prepare:publish`; all public pages are served from `docs/`.

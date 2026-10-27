@@ -8,7 +8,7 @@ createServer(async (req, res) => {
   try {
     const pathname = decodeURIComponent(new URL(req.url, 'http://localhost').pathname);
     const file = resolve(root, '.' + (pathname === '/' ? '/index.html' : pathname));
-    if (!file.startsWith(root + sep) || ![...PAGES.map(page=>page.file), 'styles.css', 'editorial.css', 'config.js', 'script.js', 'robots.txt', 'sitemap.xml'].includes(file.slice(root.length + 1)) && !file.startsWith(resolve(root, 'assets') + sep)) {
+    if (!file.startsWith(root + sep) || ![...PAGES.map(page=>page.file), 'styles.css', 'editorial.css', 'accreditation.css', 'config.js', 'script.js', 'robots.txt', 'sitemap.xml'].includes(file.slice(root.length + 1)) && !file.startsWith(resolve(root, 'assets') + sep)) {
       res.writeHead(404).end('Not found'); return;
     }
     const body = await readFile(file);

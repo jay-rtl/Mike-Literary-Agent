@@ -29,6 +29,7 @@ for(const page of PAGES){
     .replace(/(<meta property="og:description" content=")[^"]+/,`$1${escape(page.description)}`)
     .replace(/(<meta name="twitter:title" content=")[^"]+/,`$1${escape(page.title)}`)
     .replace(/(<meta name="twitter:description" content=")[^"]+/,`$1${escape(page.description)}`);
+  if(page.key==='accreditation')head=head.replace('</head>','  <link rel="stylesheet" href="accreditation.css">\n</head>');
   const nav = navigation.map(([key,label])=>{
     const target=PAGES.find(candidate=>candidate.key===key);
     return `<a href="${target.file}"${key===page.key?' aria-current="page"':''}${key==='contact'?' class="nav-contact"':''}>${label}${key==='contact'?' <span aria-hidden="true">↗</span>':''}</a>`;
@@ -42,10 +43,10 @@ for(const page of PAGES){
   }).join('\n');
   if(page.key==='representation')content=content.replace('Your manuscript is<br><em>the beginning.</em>','Your manuscript<br><em>is the beginning.</em>');
   if(page.key==='home') content+=`\n${intro}\n${overview}`;
-  else content=`<section class="page-intro"><div class="wrap"><nav class="breadcrumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><span aria-hidden="true">/</span><span aria-current="page">${page.label}</span></nav><p class="eyebrow">MIKE PETRO / INDEPENDENT REPRESENTATION</p><h1>${page.heading}</h1></div></section>\n${content}`;
+  else if(page.key!=='accreditation')content=`<section class="page-intro"><div class="wrap"><nav class="breadcrumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><span aria-hidden="true">/</span><span aria-current="page">${page.label}</span></nav><p class="eyebrow">MIKE PETRO / INDEPENDENT REPRESENTATION</p><h1>${page.heading}</h1></div></section>\n${content}`;
   if(servicePages.includes(page)) content=content.replace('</section>',`</section><nav class="service-navigation wrap" aria-label="Representation areas">${servicePages.map(target=>`<a href="${target.file}"${target===page?' aria-current="page"':''}>${target.label}</a>`).join('')}</nav>`);
   if(page.key==='accreditation') content+=accreditation;
-  if(page.key!=='contact')content+=cta;
+  if(!['contact','accreditation'].includes(page.key))content+=cta;
   // Keep local fragments local; route links to moved sections to their own page.
   content=content.replace(/href="#([^"]+)"/g,(match,id)=>{
     if(id==='main'||id==='top'||page.sections.includes(id))return match;

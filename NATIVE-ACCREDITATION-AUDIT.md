@@ -1,5 +1,7 @@
 # Native accreditation/profile page
 
+Historical native-page audit. The later screenshot-led compact red layout and one-page A4 print verification are documented in `COMPACT-REFERENCE-AUDIT.md`.
+
 ## 1. Implemented
 
 Replaced the Google Sites outbound-reference panel with native HTML at `accreditation.html`, generated from `content/accreditation.html`. The page now contains a professional introduction, six representation-framework topics, an independent profile record, supplied reference identifier, industry context, local Contact links, and a print action. No Google Sites link, iframe, redirect, imported script, or remote asset remains on this page.
