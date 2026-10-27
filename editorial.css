@@ -139,3 +139,40 @@ input:focus,textarea:focus,select:focus{background:#ffffff09}
 @media(min-width:701px) and (max-width:950px){.hero h1{font-size:clamp(47px,6vw,58px)}}
 @media(max-width:700px){.hero h1{font-size:clamp(44px,12.8vw,76px)}.screen-copy h2{font-size:clamp(70px,21vw,100px)}}
 @media(max-width:370px){.hero h1{font-size:42px}.screen-copy h2{font-size:70px}}
+
+/* Standalone page layouts share the portfolio's typography and motion. */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.page-intro{background:var(--navy);color:var(--ivory);padding:34px 0 72px}
+.breadcrumbs{display:flex;gap:15px;align-items:center;font-size:9px;color:#bfc5cf;margin-bottom:50px;flex-wrap:wrap}
+.breadcrumbs a{text-decoration:none;border-bottom:1px solid #b8963e80}
+.page-intro .eyebrow{color:var(--champagne);font-size:8px}
+.page-intro h1{font-size:clamp(62px,6vw,88px);line-height:.98;letter-spacing:-1.8px;margin:0;max-width:1000px;animation:editorial-enter .8s var(--ease) both}
+.page-intro h1 em{color:var(--champagne)}
+.service-navigation{display:flex;gap:32px;padding-block:24px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.service-navigation a{font-size:11px;text-decoration:none;padding:8px 0;border-bottom:1px solid transparent}
+.service-navigation a[aria-current=page]{border-color:var(--gold);color:#79602a}
+.chapter-cta{padding:70px 0;background:var(--soft);border-top:1px solid var(--line)}
+.chapter-cta .wrap{display:grid;grid-template-columns:1.2fr 1fr;gap:100px;align-items:center}
+.chapter-cta h2{font-size:57px;margin:0}
+.chapter-cta p:not(.eyebrow){font-size:13px;color:var(--muted);max-width:360px;margin-bottom:25px}
+.chapter-cta .eyebrow{font-size:8px}
+.overview-link{display:grid;grid-template-columns:45px 1.1fr 1fr 25px;gap:28px;align-items:center;text-decoration:none;padding:32px 0;border-top:1px solid var(--line);transition:padding-inline .4s var(--ease)}
+.overview-link:last-child{border-bottom:1px solid var(--line)}
+.overview-link h3{font-size:34px;margin:0}
+.overview-link p{font-size:12px;line-height:1.9;color:var(--muted);margin:0}
+.overview-link>span:last-child{color:#79602a;font-size:23px;transition:transform .3s}
+.overview-link:hover>span:last-child{transform:translate(3px,-3px)}
+.reference-grid{display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:start}
+.reference-grid>div>p:not(.eyebrow):not(.large-copy){font-size:13px;color:var(--muted);max-width:390px;line-height:1.9}
+.reference-panel{background:var(--navy);color:var(--ivory);padding:42px;border-top:2px solid var(--gold)}
+.reference-panel h3{font-size:40px;margin:25px 0}
+.reference-panel p{font-size:12px;color:#bfc5cf;line-height:1.9}
+.reference-panel .button{margin:20px 0 10px;gap:20px}
+.reference-panel .reference-domain{font-size:10px;letter-spacing:.5px;margin:5px 0 28px}
+.reference-panel .reference-note{border-top:1px solid #ffffff35;padding-top:22px;margin-bottom:0;font-size:11px}
+[data-page=about] .about{padding-top:85px}
+[data-page=film] .film{padding-top:60px}
+[data-page=contact] .contact{padding-top:50px}
+@media(max-width:1100px){.site-header nav{gap:17px}.site-header nav a{font-size:10px}.chapter-cta .wrap,.reference-grid{gap:55px}.reference-panel{padding:32px}.overview-link{gap:20px}.overview-link h3{font-size:29px}}
+@media(max-width:850px){.js-nav #primary-nav a{font-size:31px}.reference-grid{gap:35px}.reference-panel{padding:28px}.reference-panel h3{font-size:34px}}
+@media(max-width:700px){.page-intro{padding:28px 0 48px}.breadcrumbs{margin-bottom:35px;font-size:9px}.page-intro h1{font-size:clamp(44px,11vw,65px);letter-spacing:-1px}.page-intro .eyebrow{font-size:7px;letter-spacing:1.2px}.chapter-cta{padding:48px 0}.chapter-cta .wrap{grid-template-columns:1fr;gap:25px}.chapter-cta h2{font-size:47px}.chapter-cta p:not(.eyebrow){font-size:12px}.service-navigation{gap:15px 23px;padding-block:17px}.service-navigation a{font-size:10px}.overview-link{grid-template-columns:25px 1fr 20px;gap:12px;padding:25px 0}.overview-link h3{font-size:29px}.overview-link p{grid-column:2;grid-row:2;font-size:12px}.overview-link>span:last-child{grid-column:3;grid-row:1}.overview-link .number{font-size:22px}.reference-grid{grid-template-columns:1fr;gap:35px}.reference-panel{padding:30px 24px}.reference-panel h3{font-size:35px}[data-page=about] .about{padding-top:60px}[data-page=contact] .contact{padding-top:35px}}

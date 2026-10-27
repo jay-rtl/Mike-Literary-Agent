@@ -1,5 +1,22 @@
 (() => {
   'use strict';
+  // Preserve links shared before the portfolio became a multipage site.
+  const legacySections = {
+    about:'about.html#about', representation:'representation.html#representation',
+    rights:'global-rights.html#rights', film:'film-television.html#film',
+    authors:'for-authors.html#authors', process:'for-authors.html#process',
+    faq:'for-authors.html#faq', experiences:'about.html#experiences', contact:'contact.html#contact'
+  };
+  function resolveLegacySection() {
+    const target = legacySections[location.hash.slice(1)];
+    if (document.body.dataset.page === 'home' && target) {
+      location.replace(target);
+      return true;
+    }
+    return false;
+  }
+  if (resolveLegacySection()) return;
+  window.addEventListener('hashchange', resolveLegacySection);
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
   const menuButton = document.querySelector('.menu-toggle');
   const navigation = document.querySelector('#primary-nav');
@@ -22,7 +39,8 @@
     const link = event.target.closest('a');
     if (!link) return;
     closeMenu();
-    const destination = document.querySelector(link.getAttribute('href'));
+    const href = link.getAttribute('href');
+    const destination = href.startsWith('#') ? document.getElementById(href.slice(1)) : null;
     if (destination) {
       destination.tabIndex = -1;
       destination.focus({ preventScroll: true });
@@ -67,7 +85,7 @@
     const sectionObserver = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (!entry.isIntersecting) return;
-        navigation.querySelectorAll('a').forEach(link => {
+        navigation.querySelectorAll('a[href^="#"]').forEach(link => {
           if (link.hash === `#${entry.target.id}`) link.setAttribute('aria-current', 'location');
           else link.removeAttribute('aria-current');
         });
@@ -92,9 +110,10 @@
     });
   }
   stageButtons.forEach(button => button.addEventListener('click', () => selectStage(button)));
-  selectStage(stageButtons[0]);
+  if (stageButtons.length) selectStage(stageButtons[0]);
 
   const form = document.querySelector('#inquiry-form');
+  if (!form) return;
   const status = document.querySelector('#form-status');
   const fallback = document.querySelector('#email-fallback');
   const prepared = document.querySelector('#prepared-message');

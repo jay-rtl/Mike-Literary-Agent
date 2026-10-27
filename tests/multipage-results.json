@@ -1,0 +1,272 @@
+{
+  "environment": "Windows headless Chrome via CDP",
+  "checks": [
+    "Eight real HTML pages return HTTP 200",
+    "Each page has a unique title",
+    "Each page has a unique description",
+    "index.html: correct canonical and sitemap URL",
+    "about.html: correct canonical and sitemap URL",
+    "representation.html: correct canonical and sitemap URL",
+    "global-rights.html: correct canonical and sitemap URL",
+    "film-television.html: correct canonical and sitemap URL",
+    "for-authors.html: correct canonical and sitemap URL",
+    "accreditation.html: correct canonical and sitemap URL",
+    "contact.html: correct canonical and sitemap URL",
+    "All internal page and fragment links resolve",
+    "Reference is linked without auto-embedding third-party content",
+    "Reference is not represented as independently verified accreditation",
+    "Submission form exists only on the Contact page",
+    "index.html: JavaScript initializes without form/stage assumptions",
+    "index.html: page navigation states match real destinations",
+    "index.html: no overflow at 1440px",
+    "index.html: no overflow at 768px",
+    "index.html: no overflow at 390px",
+    "index.html: no overflow at 320px",
+    "index.html: portrait/supporting image loads",
+    "about.html: JavaScript initializes without form/stage assumptions",
+    "about.html: page navigation states match real destinations",
+    "about.html: no overflow at 1440px",
+    "about.html: no overflow at 768px",
+    "about.html: no overflow at 390px",
+    "about.html: no overflow at 320px",
+    "about.html: portrait/supporting image loads",
+    "representation.html: JavaScript initializes without form/stage assumptions",
+    "representation.html: page navigation states match real destinations",
+    "representation.html: no overflow at 1440px",
+    "representation.html: no overflow at 768px",
+    "representation.html: no overflow at 390px",
+    "representation.html: no overflow at 320px",
+    "global-rights.html: JavaScript initializes without form/stage assumptions",
+    "global-rights.html: page navigation states match real destinations",
+    "global-rights.html: no overflow at 1440px",
+    "global-rights.html: no overflow at 768px",
+    "global-rights.html: no overflow at 390px",
+    "global-rights.html: no overflow at 320px",
+    "film-television.html: JavaScript initializes without form/stage assumptions",
+    "film-television.html: page navigation states match real destinations",
+    "film-television.html: no overflow at 1440px",
+    "film-television.html: no overflow at 768px",
+    "film-television.html: no overflow at 390px",
+    "film-television.html: no overflow at 320px",
+    "film-television.html: portrait/supporting image loads",
+    "for-authors.html: JavaScript initializes without form/stage assumptions",
+    "for-authors.html: page navigation states match real destinations",
+    "for-authors.html: no overflow at 1440px",
+    "for-authors.html: no overflow at 768px",
+    "for-authors.html: no overflow at 390px",
+    "for-authors.html: no overflow at 320px",
+    "accreditation.html: JavaScript initializes without form/stage assumptions",
+    "accreditation.html: page navigation states match real destinations",
+    "accreditation.html: no overflow at 1440px",
+    "accreditation.html: no overflow at 768px",
+    "accreditation.html: no overflow at 390px",
+    "accreditation.html: no overflow at 320px",
+    "contact.html: JavaScript initializes without form/stage assumptions",
+    "contact.html: page navigation states match real destinations",
+    "contact.html: no overflow at 1440px",
+    "contact.html: no overflow at 768px",
+    "contact.html: no overflow at 390px",
+    "contact.html: no overflow at 320px",
+    "Legacy #about opens about.html",
+    "Legacy #rights opens global-rights.html",
+    "Legacy #contact opens contact.html",
+    "Legacy #process opens for-authors.html",
+    "No automatic external requests from accreditation or other pages",
+    "No browser exceptions or error logs across all pages"
+  ],
+  "layouts": [
+    {
+      "page": "index.html",
+      "width": 1440,
+      "scrollWidth": 1425,
+      "headerWidth": 1313
+    },
+    {
+      "page": "index.html",
+      "width": 768,
+      "scrollWidth": 753,
+      "headerWidth": 689
+    },
+    {
+      "page": "index.html",
+      "width": 390,
+      "scrollWidth": 375,
+      "headerWidth": 335
+    },
+    {
+      "page": "index.html",
+      "width": 320,
+      "scrollWidth": 305,
+      "headerWidth": 265
+    },
+    {
+      "page": "about.html",
+      "width": 1440,
+      "scrollWidth": 1425,
+      "headerWidth": 1313
+    },
+    {
+      "page": "about.html",
+      "width": 768,
+      "scrollWidth": 753,
+      "headerWidth": 689
+    },
+    {
+      "page": "about.html",
+      "width": 390,
+      "scrollWidth": 375,
+      "headerWidth": 335
+    },
+    {
+      "page": "about.html",
+      "width": 320,
+      "scrollWidth": 305,
+      "headerWidth": 265
+    },
+    {
+      "page": "representation.html",
+      "width": 1440,
+      "scrollWidth": 1425,
+      "headerWidth": 1313
+    },
+    {
+      "page": "representation.html",
+      "width": 768,
+      "scrollWidth": 753,
+      "headerWidth": 689
+    },
+    {
+      "page": "representation.html",
+      "width": 390,
+      "scrollWidth": 375,
+      "headerWidth": 335
+    },
+    {
+      "page": "representation.html",
+      "width": 320,
+      "scrollWidth": 305,
+      "headerWidth": 265
+    },
+    {
+      "page": "global-rights.html",
+      "width": 1440,
+      "scrollWidth": 1425,
+      "headerWidth": 1313
+    },
+    {
+      "page": "global-rights.html",
+      "width": 768,
+      "scrollWidth": 753,
+      "headerWidth": 689
+    },
+    {
+      "page": "global-rights.html",
+      "width": 390,
+      "scrollWidth": 375,
+      "headerWidth": 335
+    },
+    {
+      "page": "global-rights.html",
+      "width": 320,
+      "scrollWidth": 305,
+      "headerWidth": 265
+    },
+    {
+      "page": "film-television.html",
+      "width": 1440,
+      "scrollWidth": 1425,
+      "headerWidth": 1313
+    },
+    {
+      "page": "film-television.html",
+      "width": 768,
+      "scrollWidth": 753,
+      "headerWidth": 689
+    },
+    {
+      "page": "film-television.html",
+      "width": 390,
+      "scrollWidth": 375,
+      "headerWidth": 335
+    },
+    {
+      "page": "film-television.html",
+      "width": 320,
+      "scrollWidth": 305,
+      "headerWidth": 265
+    },
+    {
+      "page": "for-authors.html",
+      "width": 1440,
+      "scrollWidth": 1425,
+      "headerWidth": 1313
+    },
+    {
+      "page": "for-authors.html",
+      "width": 768,
+      "scrollWidth": 753,
+      "headerWidth": 689
+    },
+    {
+      "page": "for-authors.html",
+      "width": 390,
+      "scrollWidth": 375,
+      "headerWidth": 335
+    },
+    {
+      "page": "for-authors.html",
+      "width": 320,
+      "scrollWidth": 305,
+      "headerWidth": 265
+    },
+    {
+      "page": "accreditation.html",
+      "width": 1440,
+      "scrollWidth": 1425,
+      "headerWidth": 1313
+    },
+    {
+      "page": "accreditation.html",
+      "width": 768,
+      "scrollWidth": 753,
+      "headerWidth": 689
+    },
+    {
+      "page": "accreditation.html",
+      "width": 390,
+      "scrollWidth": 375,
+      "headerWidth": 335
+    },
+    {
+      "page": "accreditation.html",
+      "width": 320,
+      "scrollWidth": 305,
+      "headerWidth": 265
+    },
+    {
+      "page": "contact.html",
+      "width": 1440,
+      "scrollWidth": 1425,
+      "headerWidth": 1313
+    },
+    {
+      "page": "contact.html",
+      "width": 768,
+      "scrollWidth": 753,
+      "headerWidth": 689
+    },
+    {
+      "page": "contact.html",
+      "width": 390,
+      "scrollWidth": 375,
+      "headerWidth": 335
+    },
+    {
+      "page": "contact.html",
+      "width": 320,
+      "scrollWidth": 305,
+      "headerWidth": 265
+    }
+  ],
+  "errors": []
+}

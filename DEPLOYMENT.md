@@ -1,5 +1,7 @@
 # GitHub Pages deployment
 
+The current eight-page architecture and accreditation reference are documented in `MULTIPAGE-AUDIT.md`. Build with `npm run prepare:publish`; all public pages are served from `docs/`.
+
 The latest editorial redesign, public email display, borderless animated menu, local fonts, and supporting image are documented in `REFINEMENT-AUDIT.md` and `ASSETS.md`. These supersede the earlier design/asset notes below.
 
 The user authorized deployment after supplying the repository URL. GitHub confirmed this is an empty public repository with push and administration access.

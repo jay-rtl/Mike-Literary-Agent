@@ -3,7 +3,6 @@
   "checks": [
     "Title and description",
     "All internal anchor destinations exist",
-    "Both supplied portraits load",
     "Email displayed in contact and footer with correct mailto links",
     "Phone destinations correct",
     "Structured data parses",
@@ -27,7 +26,7 @@
     "Mobile navigation opens",
     "Mobile toggle has no border and animated icon enters close state",
     "Escape closes navigation and returns focus",
-    "Mobile link closes navigation and focuses destination",
+    "Mobile link navigates to the About page with a closed menu",
     "Reduced motion disables animation and smooth scrolling",
     "Back to top appears after scrolling",
     "No-JavaScript navigation, content, and all process stages remain visible",
@@ -43,14 +42,6 @@
         {
           "width": 619,
           "loaded": true
-        },
-        {
-          "width": 432,
-          "loaded": true
-        },
-        {
-          "width": 720,
-          "loaded": true
         }
       ],
       "heroHeading": 612
@@ -61,14 +52,6 @@
       "images": [
         {
           "width": 440,
-          "loaded": true
-        },
-        {
-          "width": 307,
-          "loaded": true
-        },
-        {
-          "width": 512,
           "loaded": true
         }
       ],
@@ -81,14 +64,6 @@
         {
           "width": 330,
           "loaded": true
-        },
-        {
-          "width": 230,
-          "loaded": true
-        },
-        {
-          "width": 384,
-          "loaded": true
         }
       ],
       "heroHeading": 335
@@ -97,14 +72,6 @@
       "width": 390,
       "scrollWidth": 375,
       "images": [
-        {
-          "width": 351,
-          "loaded": true
-        },
-        {
-          "width": 331,
-          "loaded": true
-        },
         {
           "width": 351,
           "loaded": true
@@ -119,14 +86,6 @@
         {
           "width": 288,
           "loaded": true
-        },
-        {
-          "width": 272,
-          "loaded": true
-        },
-        {
-          "width": 288,
-          "loaded": true
         }
       ],
       "heroHeading": 265
@@ -134,26 +93,28 @@
   ],
   "runtimeErrors": [],
   "requests": [
-    "http://127.0.0.1:4173/",
+    "http://127.0.0.1:4173/contact.html",
     "http://127.0.0.1:4173/styles.css",
     "http://127.0.0.1:4173/assets/fonts/cormorant-latin.woff2",
     "http://127.0.0.1:4173/assets/fonts/manrope-latin.woff2",
     "http://127.0.0.1:4173/editorial.css",
     "http://127.0.0.1:4173/config.js",
     "http://127.0.0.1:4173/script.js",
-    "http://127.0.0.1:4173/assets/mike-petro-hero-1100.jpg",
     "http://127.0.0.1:4173/assets/fonts/cormorant-italic-latin.woff2",
-    "http://127.0.0.1:4173/assets/mike-petro-about-491.jpg",
     "http://127.0.0.1:4173/assets/favicon.svg",
-    "http://127.0.0.1:4173/assets/editorial-book-720.jpg",
+    "http://127.0.0.1:4173/for-authors.html",
+    "http://127.0.0.1:4173/",
+    "http://127.0.0.1:4173/assets/mike-petro-hero-1100.jpg",
+    "http://127.0.0.1:4173/about.html",
+    "http://127.0.0.1:4173/assets/mike-petro-about-491.jpg",
     "http://127.0.0.1:4173/assets/mike-petro-hero-550.jpg",
     "http://127.0.0.1:4173/assets/favicon.ico"
   ],
   "performance": [
     {
-      "domContentLoadedMs": 16.40000000037253,
-      "durationMs": 50.90000000037253,
-      "transferBytes": 23841
+      "domContentLoadedMs": 17.0999999998603,
+      "durationMs": 41.799999999813735,
+      "transferBytes": 9714
     }
   ]
 }

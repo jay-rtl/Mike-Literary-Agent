@@ -1,4 +1,5 @@
 import { writeFile } from 'node:fs/promises';
+import { PAGES } from '../site-pages.mjs';
 const tabs=await(await fetch('http://127.0.0.1:9222/json')).json();
 const ws=new WebSocket(tabs.find(t=>t.type==='page'&&t.url.startsWith('http://127.0.0.1')).webSocketDebuggerUrl);
 await new Promise(r=>ws.addEventListener('open',r,{once:true}));
@@ -11,6 +12,9 @@ await call('Page.reload');await new Promise(r=>setTimeout(r,500));
 for(const width of [1440,390]){
  await call('Emulation.setDeviceMetricsOverride',{width,height:1000,deviceScaleFactor:1,mobile:false});
  for(const section of ['about','representation','rights','film','authors','process','faq','contact']){
+  const page=PAGES.find(page=>page.sections.includes(section));
+  await call('Page.navigate',{url:`http://127.0.0.1:4173/${page.file}`});
+  await new Promise(r=>setTimeout(r,250));
   await run(`document.getElementById('${section}').scrollIntoView({behavior:'instant'})`);
   await new Promise(r=>setTimeout(r,100));
   const shot=await call('Page.captureScreenshot',{format:'png'});
